@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /life/
+
+Sitemap: https://ilvera-s.github.io/sitemap.xml
