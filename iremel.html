@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иремель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6B4E3D;
+            --accent-color: #C5A880;
+            --bg-light: #F8F3EE;
+            --text-dark: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+            padding: 36px 0 64px;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .top-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            border: 1px solid rgba(107, 78, 61, 0.25);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            background: #fff;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+            margin-bottom: 8px;
+        }
+
+        .lead {
+            margin-bottom: 22px;
+            font-size: 1.07rem;
+        }
+
+        .location-line {
+            margin: -8px 0 22px;
+            font-size: 0.98rem;
+            color: #3f3a35;
+        }
+
+        .location-line a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .location-line a:hover {
+            text-decoration: underline;
+        }
+
+        .story-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .story-item {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border-top: 3px solid var(--accent-color);
+            padding: 22px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .story-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .story-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.85rem;
+            margin-bottom: 8px;
+        }
+
+        .story-text h3 {
+            color: var(--primary-color);
+            margin: 12px 0 8px;
+            font-size: 1.08rem;
+        }
+
+        .story-text p {
+            margin-bottom: 10px;
+        }
+
+        .story-text ul {
+            padding-left: 22px;
+            margin-top: 8px;
+        }
+
+        .story-text li {
+            margin-bottom: 8px;
+        }
+
+        .cta-panel {
+            margin-top: 24px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 24px 28px;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .cta-panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+        }
+
+        .cta-panel p {
+            margin-bottom: 14px;
+        }
+
+        .cta-location {
+            margin: 0 0 10px;
+            font-size: 0.97rem;
+            color: #3f3a35;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cta-btn {
+            text-decoration: none;
+            color: #fff;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .cta-btn.tg { background: #229ED9; }
+        .cta-btn.max { background: #2f3440; }
+        .cta-btn.vk { background: #0077FF; }
+
+        @media (min-width: 900px) {
+            .story-item {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+                align-items: center;
+            }
+
+            .story-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .story-item:nth-child(even) .story-photo {
+                order: 2;
+            }
+
+            .story-item:nth-child(even) .story-text {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="top-links">
+            <a href="./index.html">На главную</a>
+        </div>
+
+        <h1>Иремель</h1>
+        <p class="lead">Ретрит «Сила рода: путешествие к Иремелю»<br>Ретрит «Познай свою силу»</p>
+        <p class="location-line"><strong>Место проведения:</strong> село Тюлюк. <a href="https://maps.app.goo.gl/uP4DPKDzHWXDJRz58" target="_blank" rel="noopener noreferrer">Google Карты</a> · <a href="https://yandex.ru/maps/-/CPbkjK-D" target="_blank" rel="noopener noreferrer">Яндекс Карты</a></p>
+
+        <section class="story-list">
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_1.jpeg" alt="Иремель — фото 1" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_1.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>Ретрит — это пространство, где мы возвращаем внимание к себе. К дыханию, к тишине, к телу, к живому присутствию и тем состояниям, которые помогают снова почувствовать свой центр.</p>
+                    <p>Если вы чувствуете, что пришло время вернуться к себе, буду рада пройти этот путь вместе с вами.</p>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_2.jpeg" alt="Иремель — фото 2" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_2.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>Иремель, одна из самых высоких среди уральских гор, находится на границе Республики Башкортостан и Челябинской области, подходит для восхождения как профессиональных альпинистов, так и начинающих любителей хайкинга и трекинга. Башкирские горы окутаны флёром мистики и загадок, поэтому путешествие по ним будет интересно всем, кто охотник за легендами и ищет места исполнения желаний.</p>
+                    <p>Приглашаем вас окунуться в красоту и таинство природы и вглубь себя на выездные ретриты у подножья горы Иремель.</p>
+                    <h3>Где находится гора Иремель</h3>
+                    <p>Гора Иремель выделяется большим зелёным участком вокруг неё. Гора расположена в одноимённом парке протяжённостью около пятидесяти тысяч гектаров.</p>
+                    <p>Весь этот густой хвойный лес простирается на Белорецкий и Учалинский районы Башкирии. Территории ближе к горе Иремель граничат с Челябинской областью. Местность входит в горный массив Южного Урала. Главная его особенность — сочетание разных ландшафтов: от дикой тайги и горной тундры до зелёных лугов.</p>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_3.jpeg" alt="Иремель — фото 3" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_3.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>Туристический сезон на горе Иремель в Башкирии открыт целый год. При этом из-за сочетания континентального климата и рельефа местности восхождение может стать настоящим испытанием. Погода здесь отличается капризностью. На вершинах Большого и Малого Иремеля часто дуют сильные ветры, достигающие скорости 9,5–14 м/с.</p>
+                    <p>Зимой нередки метели и сильные морозы, а ясное небо может быстро смениться снежным бураном. Даже летом погода остаётся капризной: солнечные дни внезапно сменяются дождями, а иногда и вовсе выпадает мокрый снег. Заморозки на вершинах могут продолжаться вплоть до июня. Такие условия делают восхождение на гору Иремель непростой задачей.</p>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_4.jpeg" alt="Иремель — фото 4" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_4.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>Существует две вершины: Большая и Малая. Чаще всего выбирают восхождение к горе Большой Иремель, пиковая величина которой достигает 1582 м. При этом высота горы Иремель в Башкирии не рекордная: у самой большой, Ямантау, до 1640 метров. Впрочем туристам она недоступна.</p>
+                    <p>Кстати, Малый Иремель не такой уж и низкий — его высота достигает 1149 метров. Это в два раза выше Эйфелевой башни. Иремель считается священной горой с богатой мифологией. Легенды описывают её как место силы, приносящей удачу тем, кто идёт с добрыми помыслами, и препятствующей злым. В древности восхождение было разрешено только жрецам; сегодня это популярный туристический объект с уникальной энергетикой.</p>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_5.jpeg" alt="Иремель — фото 5" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_5.jpeg';">
+                </div>
+                <div class="story-text">
+                    <ul>
+                        <li>Гора-исполнительница желаний. Считается, что Иремель принимает только людей с чистой душой, открывая им истинный смысл жизни. Считается, что у большинства посетителей загаданные на вершине желания сбываются.</li>
+                        <li>Место для избранных. В древности простым людям запрещалось подниматься на вершину. Нарушители могли сбиться с пути, попасть в бурю или заблудиться из-за «гнева духов».</li>
+                        <li>Иремель и Ямантау. По легенде это «добрая гора», обитель светлых сил. В то время как соседняя Ямантау — «плохая гора», где обитал змей.</li>
+                        <li>Богатырская история. Башкирский эпос связывает гору с Иделем (сыном Урала-батыра), который разрубил гору мечом, дав начало главной реке Агидель (Белой).</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_6.jpeg" alt="Иремель — фото 6" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_6.jpeg';">
+                </div>
+                <div class="story-text">
+                    <ul>
+                        <li>Священный статус. Иремель долгое время был табуированным местом, местом сбора старейшин и священных обрядов.</li>
+                        <li>Исторические инциденты. Д. Н. Мамин-Сибиряк в Уралвед.ru описывал случай, когда Оренбургский губернатор в XIX веке попытался взойти на гору с «удобствами», но молния ударила в палатку, что было расценено как гнев горы.</li>
+                        <li>Статус. С 1965 года Иремель объявлен памятником природы, а с 2010 года функционирует природный парк «Иремель».</li>
+                    </ul>
+                    <p>Гора Иремель известна не только своей природой и интересными пешими маршрутами, ещё о ней ходит множество легенд. Разберём основные.</p>
+                    <p>Есть три основные версии этимологии названия:</p>
+                    <ul>
+                        <li>башкирская и монгольская, согласно которым слово образуется из двух: «ир» — мужчина и «эмел» — седло;</li>
+                        <li>тюркская — некоторые филологи считают, что название можно перевести как «место, дарующее силу»;</li>
+                        <li>индоиранская — согласно ей ir — это «ветер», а mauli — «вершина». Так и получается, что Иремель — «вершина ветров».</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_7.jpeg" alt="Иремель — фото 7" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_7.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>На гору Иремель поднимаются по четырём основным маршрутам. Они разные по сложности и протяжённости.</p>
+                    <p>Восхождение к горе Иремель обычно начинают из села Тюлюк. Это самый короткий путь до вершины, протяжённостью не более 15 километров. Дорога проходит по лесным тропам, лугам и грунтовым дорогам. Маршрут подходит для начинающих туристов и семейных походов.</p>
+                </div>
+            </article>
+
+            <article class="story-item">
+                <div class="story-photo">
+                    <img src="reviews/iremel/photo_8.jpeg" alt="Иремель — фото 8" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=photo_8.jpeg';">
+                </div>
+                <div class="story-text">
+                    <p>В некоторых башкирских родах до сих пор сохранилась традиция чтить Иремель как место силы. На склонах горы есть тайные участки — родовые камни, где испокон веков проводились семейные обряды.</p>
+                    <p>Рассказывают, что ещё в начале XXI века одна семья устраивала там благодарственный ритуал в честь поступления сына в университет. Эти священные места держат в секрете, опасаясь, что туристы или случайные прохожие нарушат покой духов.</p>
+                    <p>Такое отношение к Иремелю — не суеверие, а часть культурной памяти, когда природа была не просто фоном, а живым существом, заслуживающим уважения.</p>
+                    <p>По одной из легенд, гора может исполнять мечты. Предание появилось из-за того, что село Тюлюк иногда переводят с башкирского как «желание», а Иремель считается священным. Поэтому путешественникам советуют дойти до самого высокого плато Кабан и загадать на нём желание.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="cta-panel">
+            <h2>Готовы обсудить участие?</h2>
+            <p class="cta-location"><strong>Локация:</strong> с. Тюлюк, Южный Урал.</p>
+            <p>Напишите удобным способом:</p>
+            <div class="cta-actions">
+                <a class="cta-btn tg" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a class="cta-btn max" href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" target="_blank" rel="noopener noreferrer">MAX</a>
+                <a class="cta-btn vk" href="https://vk.ru/id177739125" target="_blank" rel="noopener noreferrer">VK</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
