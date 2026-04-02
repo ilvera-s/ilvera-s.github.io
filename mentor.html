@@ -94,20 +94,48 @@
             margin-bottom: 10px;
         }
 
-        .cta {
+        .cta-panel {
             margin-top: 24px;
-            font-weight: 600;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 24px 28px;
+            border-top: 3px solid var(--accent-color);
         }
 
-        .cta-link {
-            display: inline-block;
-            margin-top: 14px;
+        .cta-panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+        }
+
+        .cta-panel p {
+            margin-bottom: 14px;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cta-btn {
             text-decoration: none;
             color: #fff;
-            background: var(--primary-color);
             border-radius: 999px;
-            padding: 11px 18px;
+            padding: 10px 16px;
             font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .cta-btn.phone { background: #6B4E3D; }
+        .cta-btn.tg { background: #229ED9; }
+        .cta-btn.max { background: #2f3440; }
+        .cta-btn.vk { background: #0077FF; }
+        .cta-btn:hover {
+            opacity: 0.95;
         }
     </style>
 </head>
@@ -148,8 +176,17 @@
                 <li>индивидуальные рекомендации и задания.</li>
             </ul>
 
-            <p class="cta">Ваш путь к себе начинается здесь.</p>
-            <a class="cta-link" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Записаться в Telegram</a>
+        </section>
+
+        <section class="cta-panel">
+            <h2>Готовы обсудить запрос?</h2>
+            <p>Запишитесь на предварительную диагностику удобным способом:</p>
+            <div class="cta-actions">
+                <a class="cta-btn phone" href="tel:+79173482348">Позвонить: +79173482348</a>
+                <a class="cta-btn tg" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a class="cta-btn max" href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" target="_blank" rel="noopener noreferrer">MAX</a>
+                <a class="cta-btn vk" href="https://vk.ru/id177739125" target="_blank" rel="noopener noreferrer">VK</a>
+            </div>
         </section>
     </main>
 </body>
