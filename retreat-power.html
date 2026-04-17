@@ -236,13 +236,7 @@
 
         <h1>Ретрит для мастеров - Познай свою силу</h1>
         <p class="location-line"><strong>Место проведения:</strong> село Тюлюк. <a href="https://maps.app.goo.gl/uP4DPKDzHWXDJRz58" target="_blank" rel="noopener noreferrer">Google Карты</a> · <a href="https://yandex.ru/maps/-/CPbkjK-D" target="_blank" rel="noopener noreferrer">Яндекс Карты</a></p>
-        <section class="dates-panel">
-            <h2>Ближайшие даты</h2>
-            <p><strong>Ретрит для мастеров «Познай свою силу»</strong></p>
-            <p>С 13 по 17 августа - мест нет</p>
-            <p>С 15 по 18 мая</p>
-            <p class="dates-contact">Следующие даты проведения ретритов можно согласовать по телефону: <a href="tel:+79173482348">+79173482348</a></p>
-        </section>
+        <section class="dates-panel" id="datesPanel" data-retreat-key="masters"></section>
 
         <section class="card">
             <h2>▌ Ретрит «Источник силы: путь к себе у подножия Иремеля»</h2>
@@ -333,5 +327,39 @@
             </div>
         </section>
     </main>
+    <script src="./retreat-dates.js"></script>
+    <script>
+        (function renderRetreatDates() {
+            const panel = document.getElementById("datesPanel");
+            const retreatKey = panel?.dataset.retreatKey;
+            const config = window.RETREAT_DATES?.[retreatKey];
+
+            if (!panel) {
+                return;
+            }
+
+            if (!config || !Array.isArray(config.dates) || !config.dates.length) {
+                panel.innerHTML = [
+                    "<h2>Ближайшие даты</h2>",
+                    "<p>Даты скоро будут добавлены.</p>"
+                ].join("");
+                return;
+            }
+
+            const datesMarkup = config.dates.map(function(dateText) {
+                return "<p>" + dateText + "</p>";
+            }).join("");
+            const additionalInfo = config.additionalInfo ? "<p>" + config.additionalInfo + "</p>" : "";
+            const contactText = config.contactText || "Следующие даты проведения ретритов можно согласовать по телефону: +79173482348";
+
+            panel.innerHTML = [
+                "<h2>Ближайшие даты</h2>",
+                "<p><strong>" + config.heading + "</strong></p>",
+                datesMarkup,
+                additionalInfo,
+                "<p class=\"dates-contact\">" + contactText + "</p>"
+            ].join("");
+        })();
+    </script>
 </body>
 </html>
