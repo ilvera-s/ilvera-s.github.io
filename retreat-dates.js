@@ -6,7 +6,7 @@ window.RETREAT_DATES = {
             "С 1 по 3 мая",
             "С 8 по 10 мая"
         ],
-        additionalInfo: "",
+        additionalInfo: " ",
         contactText: "Следующие даты проведения ретритов можно согласовать по телефону: +79173482348"
     },
     masters: {
@@ -15,7 +15,7 @@ window.RETREAT_DATES = {
             "С 13 по 17 августа - мест нет",
             "С 15 по 18 мая"
         ],
-        additionalInfo: "",
+        additionalInfo: " ",
         contactText: "Следующие даты проведения ретритов можно согласовать по телефону: +79173482348"
     }
 };
