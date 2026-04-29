@@ -230,16 +230,34 @@
             width: fit-content;      */
         }
 
+        @media (min-width: 901px) {
+            .hero-badges {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px 16px;
+                width: min(100%, 760px);
+            }
+        }
+
         .hero-badge {
             background: #fff;
-            padding: 8px 15px;
+            padding: 10px 18px;
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             color: #777;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 50px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @media (min-width: 901px) {
+            .hero-badge.badge-wide {
+                grid-column: 1 / -1;
+            }
         }
 
         .hero-badge:hover {
@@ -500,6 +518,40 @@
             margin: 0;
         }
 
+        .preview-actions {
+            display: none;
+            margin-bottom: 14px;
+            flex-shrink: 0;
+        }
+
+        .preview-actions.active {
+            display: block;
+        }
+
+        .preview-video-btn {
+            width: 100%;
+            border: 0;
+            border-radius: 999px;
+            padding: 11px 14px;
+            font: inherit;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #6B4E3D, #8B6B3D);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+            box-shadow: 0 8px 18px rgba(107, 78, 61, 0.22);
+        }
+
+        .preview-video-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(107, 78, 61, 0.28);
+        }
+
+        .preview-video-btn:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
         .preview-text {
             font-size: 0.95rem;
             color: #444;
@@ -521,6 +573,69 @@
             border: 2px dashed #eee;
             border-radius: 12px;
             background: #fff;
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(22, 18, 14, 0.74);
+            backdrop-filter: blur(6px);
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-dialog {
+            width: min(900px, 100%);
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+            overflow: hidden;
+        }
+
+        .video-modal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 16px 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .video-modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .video-modal-close {
+            border: 0;
+            background: transparent;
+            color: #666;
+            font-size: 1.8rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+
+        .video-modal-body {
+            padding: 16px;
+            background: #f7f3ee;
+        }
+
+        .video-modal-player {
+            width: 100%;
+            display: block;
+            border-radius: 14px;
+            background: #000;
+            max-height: min(72vh, 760px);
         }
 
         /* --- CTA --- */
@@ -625,8 +740,22 @@
                 text-align: left; /* Текст списка лучше читать слева */
                 display: inline-block; /* Чтобы список был по центру, но текст слева */
             }
-            .hero-badges { 
-                justify-content: center; 
+            .hero-badges {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+                width: 100%;
+                max-width: 560px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-badge {
+                width: 100%;
+                min-height: 50px;
+                padding: 10px 14px;
+            }
+            .hero-badge.badge-wide {
+                grid-column: 1 / -1;
             }
             
             /* КАРТИНКА */
@@ -655,6 +784,18 @@
                 height: 100px;
                 max-height: none;
             }
+            .video-modal {
+                padding: 12px;
+            }
+            .video-modal-topbar {
+                padding: 14px 14px 12px;
+            }
+            .video-modal-body {
+                padding: 10px;
+            }
+            .video-modal-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -672,9 +813,10 @@
                     
                     <div class="hero-badges">
                         <a href="../mentor.html" class="hero-badge">💎 Наставничество</a>
-                        <a href="../retreat-family.html" class="hero-badge">🌿 Семейный ретрит-Сила рода</a>
-                        <a href="../retreat-power.html" class="hero-badge">⛰️ Ретрит - Познай свою силу</a>
+                        <a href="../lead-casting.html" class="hero-badge">⚱️ Отливка свинцом</a>
                         <a href="../iremel.html" class="hero-badge">⛰️ Иремель</a>
+                        <a href="../retreat-family.html" class="hero-badge">🌿 Семейный ретрит - Сила рода</a>
+                        <a href="../retreat-power.html" class="hero-badge badge-wide">🧭 Ретрит для мастеров - Познай свою силу</a>
                     </div>
 
                     <!-- Оставляем только главный призыв -->
@@ -812,6 +954,9 @@
                         <img src="" alt="" class="preview-image" id="previewImg">
                         <div class="preview-title" id="previewTitle">Имя клиента</div>
                     </div>
+                    <div class="preview-actions" id="previewActions">
+                        <button type="button" class="preview-video-btn" id="previewVideoButton">▶ Смотреть видеоотзыв</button>
+                    </div>
                     <div class="preview-text" id="previewText">
                         Текст отзыва появится здесь...
                     </div>
@@ -819,6 +964,18 @@
             </div>
         </div>
     </section>
+
+    <div class="video-modal" id="videoModal" aria-hidden="true">
+        <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+            <div class="video-modal-topbar">
+                <div class="video-modal-title" id="videoModalTitle">Видеоотзыв клиента</div>
+                <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Закрыть видео">&times;</button>
+            </div>
+            <div class="video-modal-body">
+                <video class="video-modal-player" id="videoModalPlayer" controls preload="none" playsinline></video>
+            </div>
+        </div>
+    </div>
 
     <!-- CTA -->
     <section class="cta">
@@ -867,6 +1024,12 @@
             const previewImg = document.getElementById('previewImg');
             const previewText = document.getElementById('previewText');
             const previewTitle = document.getElementById('previewTitle');
+            const previewActions = document.getElementById('previewActions');
+            const previewVideoButton = document.getElementById('previewVideoButton');
+            const videoModal = document.getElementById('videoModal');
+            const videoModalClose = document.getElementById('videoModalClose');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+            const videoModalPlayer = document.getElementById('videoModalPlayer');
             const fallbackReviewText = 'Текст отзыва пока не добавлен.';
             const fallbackReviewerTitle = 'Отзыв клиента';
             const dataRoot = window.reviewsData && typeof window.reviewsData === 'object' ? window.reviewsData : {};
@@ -909,6 +1072,36 @@
                     return `../${trimmed.slice(2)}`;
                 }
                 return `../${trimmed}`;
+            };
+
+            const closeVideoModal = function() {
+                if (!videoModal || !videoModalPlayer) {
+                    return;
+                }
+                videoModal.classList.remove('active');
+                videoModal.setAttribute('aria-hidden', 'true');
+                document.body.style.removeProperty('overflow');
+                videoModalPlayer.pause();
+                videoModalPlayer.removeAttribute('src');
+                videoModalPlayer.removeAttribute('poster');
+                videoModalPlayer.load();
+            };
+
+            const openVideoModal = function(videoSrc, posterSrc, title) {
+                if (!videoModal || !videoModalPlayer || !videoSrc) {
+                    return;
+                }
+                videoModalTitle.textContent = title ? `Видеоотзыв: ${title}` : 'Видеоотзыв клиента';
+                videoModalPlayer.src = videoSrc;
+                if (posterSrc) {
+                    videoModalPlayer.poster = posterSrc;
+                } else {
+                    videoModalPlayer.removeAttribute('poster');
+                }
+                videoModal.classList.add('active');
+                videoModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                videoModalPlayer.load();
             };
 
             const detectAvailablePhotoCount = function(maxCount) {
@@ -963,6 +1156,21 @@
                 previewTitle.innerText = element.dataset.title;
                 previewText.innerText = element.dataset.text || fallbackReviewText;
 
+                const videoSrc = element.dataset.video || '';
+                if (previewActions && previewVideoButton) {
+                    if (videoSrc) {
+                        previewActions.classList.add('active');
+                        previewVideoButton.dataset.video = videoSrc;
+                        previewVideoButton.dataset.poster = element.dataset.img || '';
+                        previewVideoButton.dataset.title = element.dataset.title || '';
+                    } else {
+                        previewActions.classList.remove('active');
+                        previewVideoButton.dataset.video = '';
+                        previewVideoButton.dataset.poster = '';
+                        previewVideoButton.dataset.title = '';
+                    }
+                }
+
                 previewPanel.classList.add('active');
 
                 if (!isAutoLoad && window.innerWidth < 768) {
@@ -983,6 +1191,9 @@
                     const imgSrc = sourceItem.photo && typeof sourceItem.photo === 'string'
                         ? normalizeMediaPath(sourceItem.photo)
                         : `../reviews/${sourceId}.jpeg`;
+                    const videoSrc = sourceItem.video && typeof sourceItem.video === 'string'
+                        ? normalizeMediaPath(sourceItem.video)
+                        : '';
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
                     item.setAttribute('role', 'button');
@@ -993,6 +1204,7 @@
                     item.dataset.img = imgSrc;
                     item.dataset.title = reviewerTitle;
                     item.dataset.text = reviewText;
+                    item.dataset.video = videoSrc;
 
                     item.addEventListener('click', function() {
                         openReview(item, false);
@@ -1023,6 +1235,34 @@
             };
 
             initGallery();
+
+            if (previewVideoButton) {
+                previewVideoButton.addEventListener('click', function() {
+                    openVideoModal(
+                        previewVideoButton.dataset.video,
+                        previewVideoButton.dataset.poster,
+                        previewVideoButton.dataset.title
+                    );
+                });
+            }
+
+            if (videoModal) {
+                videoModal.addEventListener('click', function(event) {
+                    if (event.target === videoModal) {
+                        closeVideoModal();
+                    }
+                });
+            }
+
+            if (videoModalClose) {
+                videoModalClose.addEventListener('click', closeVideoModal);
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
+                    closeVideoModal();
+                }
+            });
 
             const copyrightText = document.getElementById('copyrightText');
             if (copyrightText) {
