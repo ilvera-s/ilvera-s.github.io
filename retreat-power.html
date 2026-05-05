@@ -174,6 +174,174 @@
             object-fit: contain;
         }
 
+        .video-gallery-intro {
+            margin-bottom: 16px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .video-card {
+            border: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+            text-align: left;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .video-card:focus-visible {
+            outline: 3px solid rgba(107, 78, 61, 0.35);
+            outline-offset: 3px;
+        }
+
+        .video-card-media {
+            display: block;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, #d9c6b4, #b99272);
+        }
+
+        .video-card-media.no-poster {
+            background:
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.24), transparent 38%),
+                linear-gradient(135deg, #d9c6b4, #b99272);
+        }
+
+        .video-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+        }
+
+        .video-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(45, 45, 45, 0.1), rgba(45, 45, 45, 0.55));
+        }
+
+        .video-card-play {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-card-media.no-poster .video-card-play {
+            left: 50%;
+            top: 50%;
+            bottom: auto;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            font-size: 1.35rem;
+        }
+
+        .video-card-body {
+            display: block;
+            padding: 16px 18px 18px;
+        }
+
+        .video-card-title {
+            display: block;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .video-card-text {
+            display: block;
+            color: #5f5650;
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(28, 20, 15, 0.7);
+            z-index: 1000;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-dialog {
+            width: min(920px, 100%);
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+        }
+
+        .video-modal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .video-modal-title {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .video-modal-close {
+            border: 0;
+            background: transparent;
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .video-modal-body {
+            padding: 16px;
+            background: #111;
+        }
+
+        .video-modal-player {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            max-height: min(72vh, 680px);
+            background: #000;
+        }
+
         .divider {
             margin: 20px 0;
             border: 0;
@@ -226,6 +394,24 @@
         .cta-btn.tg { background: #229ED9; }
         .cta-btn.max { background: #2f3440; }
         .cta-btn.vk { background: #0077FF; }
+
+        @media (max-width: 720px) {
+            .video-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .video-modal {
+                padding: 12px;
+            }
+
+            .video-modal-topbar {
+                padding: 14px 16px;
+            }
+
+            .video-modal-body {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -300,7 +486,7 @@
             <h3 id="rape-ceremony">▌ Церемония Рапе – инструмент традиционной шаманской медицины</h3>
             <p><em>Первый шаг к Знанию человек делает вслепую. Только многие другие его шаги, откроют понимание происходящего. Мироздание поёт песни Силы - видящий воин воспринимает их вибрации!</em><br>К. Кастанеда</p>
             <figure class="media-shot">
-                <img src="reviews/rape/photo_1.jpeg" alt="Церемония рапе — фото" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1400x875?text=photo_1.jpeg';">
+                <img src="media/retreat-power/photo_1.jpeg" alt="Церемония рапе — фото" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/1400x875?text=photo_1.jpeg';">
             </figure>
             <p><strong>Церемония Рапе</strong></p>
             <p>Истоки этой церемонии ведут в далекое прошлое и традиционно производится она племенами Амазонки на протяжении тысяч лет.</p>
@@ -313,6 +499,14 @@
             <p>Рапе оказывает выраженный лечебный эффект на организм и психику человека, о котором мы поговорим ниже.</p>
             <p>Травы, входящие в состав смесей, произрастают в диких лесах Амазонии и являются экологически чистыми.</p>
             <p>Это полностью легальный продукт.</p>
+
+            <hr class="divider">
+
+            <div id="retreatVideosSection" hidden>
+                <h3>▌ Видео с ретритов</h3>
+                <p class="video-gallery-intro">Как это было...👇</p>
+                <div class="video-gallery" id="retreatVideosGrid"></div>
+            </div>
         </section>
 
         <section class="cta-panel">
@@ -327,6 +521,17 @@
             </div>
         </section>
     </main>
+    <div class="video-modal" id="retreatVideoModal" aria-hidden="true">
+        <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="retreatVideoModalTitle">
+            <div class="video-modal-topbar">
+                <div class="video-modal-title" id="retreatVideoModalTitle">Видео с ретритов</div>
+                <button type="button" class="video-modal-close" id="retreatVideoModalClose" aria-label="Закрыть видео">&times;</button>
+            </div>
+            <div class="video-modal-body">
+                <video class="video-modal-player" id="retreatVideoModalPlayer" controls preload="none" playsinline></video>
+            </div>
+        </div>
+    </div>
     <script src="./retreat-dates.js"></script>
     <script>
         (function renderRetreatDates() {
@@ -359,6 +564,256 @@
                 additionalInfo,
                 "<p class=\"dates-contact\">" + contactText + "</p>"
             ].join("");
+        })();
+
+        (function renderRetreatVideos() {
+            const section = document.getElementById("retreatVideosSection");
+            const grid = document.getElementById("retreatVideosGrid");
+            const modal = document.getElementById("retreatVideoModal");
+            const modalTitle = document.getElementById("retreatVideoModalTitle");
+            const modalPlayer = document.getElementById("retreatVideoModalPlayer");
+            const modalClose = document.getElementById("retreatVideoModalClose");
+            const mediaDirectory = "media/retreat-power";
+            const fileBaseName = "retreat-video_";
+            const videoExtensions = ["mp4", "mov", "m4v", "webm"];
+            const posterExtensions = ["jpg", "jpeg", "png", "webp"];
+            const maxVideoChecks = 20;
+            const missLimit = 3;
+
+            if (!section || !grid || !modal || !modalTitle || !modalPlayer || !modalClose) {
+                return;
+            }
+
+            const escapeHtml = function(value) {
+                return String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/\"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            };
+
+            const probeVideo = async function(src) {
+                if (window.location.protocol !== "file:") {
+                    try {
+                        const response = await fetch(encodeURI(src), {
+                            method: "HEAD",
+                            cache: "no-store"
+                        });
+                        return response.ok;
+                    } catch (error) {
+                        // Fall back to media probing below.
+                    }
+                }
+
+                return new Promise(function(resolve) {
+                    const probe = document.createElement("video");
+                    let settled = false;
+                    const cleanup = function() {
+                        probe.removeAttribute("src");
+                        probe.load();
+                    };
+                    const finish = function(result) {
+                        if (settled) {
+                            return;
+                        }
+                        settled = true;
+                        cleanup();
+                        resolve(result);
+                    };
+
+                    probe.preload = "metadata";
+                    probe.muted = true;
+                    probe.playsInline = true;
+                    probe.onloadedmetadata = function() {
+                        finish(true);
+                    };
+                    probe.onerror = function() {
+                        finish(false);
+                    };
+                    probe.src = src;
+                    probe.load();
+
+                    window.setTimeout(function() {
+                        finish(false);
+                    }, 2500);
+                });
+            };
+
+            const probeImage = async function(src) {
+                if (window.location.protocol !== "file:") {
+                    try {
+                        const response = await fetch(encodeURI(src), {
+                            method: "HEAD",
+                            cache: "no-store"
+                        });
+                        return response.ok;
+                    } catch (error) {
+                        // Fall back to image probing below.
+                    }
+                }
+
+                return new Promise(function(resolve) {
+                    const probe = new Image();
+                    let settled = false;
+                    const finish = function(result) {
+                        if (settled) {
+                            return;
+                        }
+                        settled = true;
+                        resolve(result);
+                    };
+
+                    probe.onload = function() {
+                        finish(true);
+                    };
+                    probe.onerror = function() {
+                        finish(false);
+                    };
+                    probe.src = src;
+
+                    window.setTimeout(function() {
+                        finish(false);
+                    }, 2500);
+                });
+            };
+
+            const detectRetreatVideos = async function() {
+                const items = [];
+                let missesInRow = 0;
+
+                for (let index = 1; index <= maxVideoChecks; index += 1) {
+                    let matchedPath = "";
+                    let matchedPoster = "";
+
+                    for (const extension of videoExtensions) {
+                        const candidate = mediaDirectory + "/" + fileBaseName + index + "." + extension;
+                        const exists = await probeVideo(candidate);
+
+                        if (exists) {
+                            matchedPath = candidate;
+                            break;
+                        }
+                    }
+
+                    if (matchedPath) {
+                        for (const extension of posterExtensions) {
+                            const candidatePoster = mediaDirectory + "/" + fileBaseName + index + "." + extension;
+                            const posterExists = await probeImage(candidatePoster);
+
+                            if (posterExists) {
+                                matchedPoster = candidatePoster;
+                                break;
+                            }
+                        }
+
+                        items.push({
+                            title: "Видео " + index,
+                            description: "Фрагмент ретрита. Нажмите, чтобы посмотреть.",
+                            video: matchedPath,
+                            poster: matchedPoster
+                        });
+                        missesInRow = 0;
+                    } else {
+                        missesInRow += 1;
+                        if (missesInRow >= missLimit) {
+                            break;
+                        }
+                    }
+                }
+
+                return items;
+            };
+
+            const closeVideoModal = function() {
+                modal.classList.remove("active");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.removeProperty("overflow");
+                modalPlayer.pause();
+                modalPlayer.removeAttribute("src");
+                modalPlayer.removeAttribute("poster");
+                modalPlayer.load();
+            };
+
+            const openVideoModal = function(item) {
+                const title = typeof item.title === "string" && item.title.trim()
+                    ? item.title.trim()
+                    : "Видео с ретрита";
+                const poster = typeof item.poster === "string" && item.poster.trim()
+                    ? item.poster.trim()
+                    : "";
+
+                modalTitle.textContent = title;
+                modalPlayer.src = item.video.trim();
+
+                if (poster) {
+                    modalPlayer.poster = poster;
+                } else {
+                    modalPlayer.removeAttribute("poster");
+                }
+
+                modal.classList.add("active");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+                modalPlayer.load();
+            };
+
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    closeVideoModal();
+                }
+            });
+
+            modalClose.addEventListener("click", closeVideoModal);
+
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape" && modal.classList.contains("active")) {
+                    closeVideoModal();
+                }
+            });
+
+            detectRetreatVideos().then(function(items) {
+                if (!items.length) {
+                    return;
+                }
+
+                items.forEach(function(item, index) {
+                    const title = typeof item.title === "string" && item.title.trim()
+                        ? item.title.trim()
+                        : "Видео " + (index + 1);
+                    const description = typeof item.description === "string" && item.description.trim()
+                        ? item.description.trim()
+                        : "Нажмите, чтобы посмотреть";
+                    const poster = typeof item.poster === "string" && item.poster.trim()
+                        ? item.poster.trim()
+                        : "";
+                    const mediaClassName = poster ? "video-card-media" : "video-card-media no-poster";
+                    const card = document.createElement("button");
+
+                    card.type = "button";
+                    card.className = "video-card";
+                    card.setAttribute("aria-label", "Открыть " + title);
+                    card.innerHTML = [
+                        "<span class=\"" + mediaClassName + "\">",
+                        poster ? "<img src=\"" + escapeHtml(poster) + "\" alt=\"" + escapeHtml(title) + "\" loading=\"lazy\">" : "",
+                        "<span class=\"video-card-overlay\"></span>",
+                        "<span class=\"video-card-play\">▶</span>",
+                        "</span>",
+                        "<span class=\"video-card-body\">",
+                        "<span class=\"video-card-title\">" + escapeHtml(title) + "</span>",
+                        "<span class=\"video-card-text\">" + escapeHtml(description) + "</span>",
+                        "</span>"
+                    ].join("");
+
+                    card.addEventListener("click", function() {
+                        openVideoModal(item);
+                    });
+
+                    grid.appendChild(card);
+                });
+
+                section.hidden = false;
+            });
         })();
     </script>
 </body>
