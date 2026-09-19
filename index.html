@@ -974,9 +974,11 @@ footer {
 
                     <!-- Правая колонка -->
                     <div class="hero-image-block">
-                        <!-- width и height — пропорции фото (нужны, чтобы страница не «прыгала» при загрузке).
-                             Замените 500 и 625 на реальные размеры файла в пикселях. -->
-                        <img src="media/reviews/photo.jpg" alt="Ильвера Ситдикова" width="500" height="625" fetchpriority="high" decoding="async">
+                        <!-- width и height — реальные размеры файла в пикселях (сейчас 960 × 1280).
+                             По ним браузер заранее резервирует место, и страница не «прыгает» при загрузке.
+                             Если замените фото на другое, обновите эти два числа. Если забудете, ничего не сломается:
+                             картинка всё равно покажется в своих пропорциях, просто при загрузке чуть сдвинется текст. -->
+                        <img src="media/reviews/photo.jpg" alt="Ильвера Ситдикова" width="960" height="1280" fetchpriority="high" decoding="async">
                     </div>
 
                 </div>
@@ -1139,12 +1141,9 @@ footer {
                 <a href="https://t.me/+0lgaxWEGh8gwZTg6" class="social-link channel" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал" title="Telegram-канал">
                     <svg class="icon" aria-hidden="true"><use href="#i-bullhorn"/></svg>
                 </a>
-                <!-- TODO WhatsApp: замените 79XXXXXXXXXX на номер в международном формате без «+» и пробелов,
-                     затем раскомментируйте. Ссылка https://whatsapp.com/dl/ вела на скачивание приложения, а не в чат.
-                <a href="https://wa.me/79XXXXXXXXXX" class="social-link wa" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" title="WhatsApp">
+                <a href="https://wa.me/qr/M2SDO3W56BNOA1" class="social-link wa" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" title="WhatsApp">
                     <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
                 </a>
-                -->
                 <a href="https://instagram.com/sitdikova_ilvera" class="social-link inst" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
                     <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
                 </a>
