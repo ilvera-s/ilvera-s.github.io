@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ретрит «Огненное сердце Урала»: 3 дня в местах силы у подножия Иремеля и Зигальги. Огненный массаж, дыхательные практики, поющие чаши, баня. Проводники — Ильвера Ситдикова и Рушана Раевская.">
-    <meta name="theme-color" content="#4A3B5E">
-    <title>Ретрит «Огненное сердце Урала» | Ильвера Ситдикова</title>
+    <meta name="theme-color" content="#6B4E3D">
+    <title>Ретрит «Огненное сердце Урала»</title>
 
     <!-- Open Graph (превью ссылки в Telegram, WhatsApp, VK) -->
     <meta property="og:type" content="website">
@@ -21,515 +21,392 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-/* ==========================================================================
-   Страница ретрита «Огненное сердце Урала». Стили и переменные — как на главной.
-   ========================================================================== */
-:root {
-    --primary-color: #4A3B5E;
-    --primary-dark: #2F2440;
-    --accent-color: #C5A880;
-    --bronze: #8B6B3D;
-    --forest: #29351D;
-    --bg-light: #F9F7F5;
-    --text-dark: #2D2D2D;
-    --text-body: #444444;
-    --text-muted: #5A5A5A;
-    --text-light: #FFFFFF;
-    --footer-bg: #333333;
-    --footer-text: #B8B8B8;
+        /* Стиль как у страниц «Сила рода» и «Познай свою силу» */
+        :root {
+            --primary-color: #6B4E3D;
+            --accent-color: #C5A880;
+            --bg-light: #F8F3EE;
+            --text-dark: #2D2D2D;
+        }
 
-    --font-body: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-[hidden] { display: none !important; }
+        [hidden] {
+            display: none !important;
+        }
 
-body {
-    font-family: var(--font-body);
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--bg-light);
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
 
-img, svg { max-width: 100%; }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(107, 78, 61, 0.45);
+            outline-offset: 3px;
+        }
 
-h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-}
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -80px;
+            z-index: 3000;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+        }
 
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 3px;
-}
+        .skip-link:focus {
+            top: 16px;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        .container {
+            width: min(1000px, 92%);
+            margin: 0 auto;
+            padding: 36px 0 24px;
+        }
 
-.icon {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-    vertical-align: -0.125em;
-    flex-shrink: 0;
-}
+        .top-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
 
-.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+        .top-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            border: 1px solid rgba(107, 78, 61, 0.25);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            background: #fff;
+        }
 
-.skip-link {
-    position: absolute;
-    left: 16px;
-    top: -80px;
-    z-index: 3000;
-    padding: 10px 16px;
-    border-radius: 8px;
-    background: var(--primary-color);
-    color: var(--text-light);
-    text-decoration: none;
-}
-.skip-link:focus { top: 16px; }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: clamp(2.1rem, 4.2vw, 3rem);
+            margin-bottom: 10px;
+        }
 
-/* --- Кнопки --- */
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 1px solid var(--primary-color);
-}
-.btn:hover { background-color: transparent; color: var(--primary-color); }
+        .lead {
+            font-size: 1.06rem;
+            margin-bottom: 24px;
+        }
 
-.btn-outline {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--forest);
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 2px solid var(--forest);
-}
-.btn-outline:hover { background-color: var(--forest); color: var(--text-light); }
+        .dates-panel {
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 20px 24px;
+            border-top: 3px solid var(--accent-color);
+        }
 
-.btn-light {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    color: var(--primary-dark);
-}
-.btn-light:hover { background-color: var(--text-light); color: var(--primary-color); }
+        .dates-panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+        }
 
-/* --- Первый экран --- */
-.hero-section {
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    padding: 28px 0 72px;
-}
+        .dates-panel p {
+            margin-bottom: 8px;
+        }
 
-.back-link {
-    display: inline-block;
-    margin-bottom: 32px;
-    color: var(--primary-color);
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-underline-offset: 3px;
-}
+        .dates-panel .dates-contact {
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
 
-.hero-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 64px;
-    align-items: center;
-}
+        .dates-panel a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
 
-.hero-wrapper.no-photo {
-    grid-template-columns: minmax(0, 760px);
-    justify-content: center;
-}
+        .dates-panel a:hover {
+            text-decoration: underline;
+        }
 
-.hero-text h1 {
-    font-size: clamp(2.3rem, 5vw, 3.4rem);
-    line-height: 1.08;
-    color: var(--primary-color);
-    margin-bottom: 14px;
-}
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 28px;
+            border-top: 3px solid var(--accent-color);
+        }
 
-.hero-place {
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--bronze);
-    margin-bottom: 24px;
-}
+        .card + .card {
+            margin-top: 24px;
+        }
 
-.hero-description {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: var(--text-body);
-    margin-bottom: 32px;
-    border-left: 4px solid var(--accent-color);
-    padding-left: 20px;
-}
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            margin-bottom: 12px;
+        }
 
-.hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .card h3 {
+            color: var(--primary-color);
+            margin-top: 22px;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
 
-/* Ближайшие даты (данные — из retreat-dates.js, как на странице семейного ретрита) */
-.dates-panel {
-    margin-bottom: 32px;
-    padding: 20px 24px;
-    background: #fff;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
+        .card h2 + h3 {
+            margin-top: 0;
+        }
 
-.dates-panel h2 {
-    font-size: 1.7rem;
-    line-height: 1.15;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
+        .card h4 {
+            color: var(--primary-color);
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
 
-.dates-panel p { margin-bottom: 6px; }
+        .card p {
+            margin-bottom: 12px;
+        }
 
-.dates-panel .dates-contact {
-    margin: 12px 0 0;
-    font-size: 0.92rem;
-    color: var(--text-muted);
-}
+        .card ul {
+            padding-left: 22px;
+        }
 
-.dates-panel a {
-    color: var(--primary-color);
-    font-weight: 600;
-    text-underline-offset: 3px;
-}
+        .card li {
+            margin-bottom: 9px;
+        }
 
-.hero-image-block {
-    width: 100%;
-    max-width: 380px;      /* фото вертикальное 9:16: при 380px по ширине высота ≈ 675px */
-    justify-self: center;
-}
+        .divider {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+        }
 
-.hero-image-block img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 25px 25px 0 rgba(197, 168, 128, 0.25);
-    object-fit: cover;
-}
+        /* Вступление: текст и вертикальное фото */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 32px;
+            align-items: start;
+        }
 
-/* --- Секции --- */
-.section { padding: 72px 0; }
-.section-light { background: var(--bg-light); }
-.section-white { background: #fff; }
+        .intro-grid.no-photo {
+            grid-template-columns: minmax(0, 1fr);
+        }
 
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    line-height: 1.15;
-    margin-bottom: 40px;
-    color: var(--primary-color);
-}
+        .media-shot {
+            width: min(100%, 300px);
+            margin: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(107, 78, 61, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            background: #f3ece5;
+        }
 
-.prose {
-    max-width: 760px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-body);
-}
-.prose p + p { margin-top: 1.1em; }
+        .media-shot img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
 
-.prose-accent {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 1.2;
-    text-align: center;
-    color: var(--primary-color);
-    margin-top: 1.2em;
-}
+        /* Проводники */
+        .guide-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
 
-/* Программа */
-.practices {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px;
-}
+        .guide-photo {
+            width: 84px;
+            height: 84px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            object-fit: cover;
+            object-position: top;
+        }
 
-.practice {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
+        .card .guide-head h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            line-height: 1.1;
+            margin: 0;
+        }
 
-.practice h3 {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin-bottom: 14px;
-    color: var(--primary-color);
-}
+        .guide-role {
+            margin: 4px 0 0;
+            font-size: 0.92rem;
+            line-height: 1.4;
+            color: #5f5650;
+        }
 
-.practice .emoji { font-size: 1.5rem; line-height: 1.1; }
-.practice p { font-size: 0.98rem; color: var(--text-body); }
-.practice p + p { margin-top: 0.8em; }
+        .guide-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: underline;
+        }
 
-/* Списки с ✦ */
-.star-list { list-style: none; }
-.star-list li {
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: var(--text-body);
-}
-.star-list li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    font-size: 1.2rem;
-    color: var(--accent-color);
-}
+        .guide-essence {
+            padding-top: 14px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
-.subsection + .subsection { margin-top: 56px; }
-.subsection > .section-title { margin-bottom: 24px; }
+        /* Блок записи и контактов */
+        .cta-panel {
+            margin-top: 24px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 24px 28px;
+            border-top: 3px solid var(--accent-color);
+        }
 
-/* Проводники */
-.guides {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
-    gap: 30px;
-    align-items: start;
-    margin-top: 48px;
-}
+        .cta-panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+        }
 
-.guide {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
+        .cta-panel p {
+            margin-bottom: 14px;
+        }
 
-.guide-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 18px;
-}
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-.guide-photo {
-    width: 84px;
-    height: 84px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    object-fit: cover;
-    object-position: top;
-}
+        .cta-btn {
+            text-decoration: none;
+            color: #fff;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
 
-.guide h3 {
-    font-size: 1.8rem;
-    line-height: 1.1;
-    color: var(--primary-color);
-}
+        .cta-btn.phone { background: #6B4E3D; }
+        .cta-btn.tg { background: #229ED9; }
+        .cta-btn.wa { background: #0E7C66; }
+        .cta-btn.max { background: #2f3440; }
+        .cta-btn.vk { background: #0077FF; }
 
-.guide-role {
-    margin-top: 4px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: var(--text-muted);
-}
+        /* Соцсети и подпись внизу */
+        .site-footer {
+            width: min(1000px, 92%);
+            margin: 0 auto;
+            padding: 8px 0 48px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6f6560;
+        }
 
-.guide p { font-size: 0.98rem; color: var(--text-body); }
-.guide p + p { margin-top: 0.8em; }
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
 
-.guide h4 {
-    margin: 24px 0 10px;
-    font-size: 1.3rem;
-    color: var(--primary-color);
-}
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 1.15rem;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
 
-.guide ul { list-style: none; }
-.guide li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    color: var(--text-body);
-}
-.guide li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    font-size: 0.9rem;
-    color: var(--accent-color);
-}
+        .social-link.tg:hover,
+        .social-link.channel:hover { background: #229ED9; }
+        .social-link.wa:hover { background: #0E7C66; }
+        .social-link.inst:hover { background: #C13584; }
+        .social-link.vk:hover { background: #0077FF; }
+        .social-link.yt:hover { background: #FF0000; }
+        .social-link.mail:hover { background: #EA4335; }
+        .social-link.max:hover { background: #2f3440; }
 
-.guide-essence {
-    margin-top: 24px;
-    padding-top: 18px;
-    border-top: 1px solid #eee;
-}
+        .max-icon {
+            font-family: "Arial Black", Arial, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1;
+        }
 
-.guide-link {
-    display: inline-block;
-    margin-top: 16px;
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-underline-offset: 3px;
-}
+        .icon {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+            vertical-align: -0.125em;
+            flex-shrink: 0;
+        }
 
-/* Призыв и контакты */
-.cta {
-    padding: 80px 0;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    text-align: center;
-}
+        .sprite {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
 
-.cta h2 {
-    font-size: 2.5rem;
-    line-height: 1.15;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-}
+        @media (max-width: 720px) {
+            .card,
+            .cta-panel {
+                padding: 22px;
+            }
 
-.cta p {
-    max-width: 700px;
-    margin: 0 auto 36px;
-    font-size: 1.1rem;
-}
+            .card h2,
+            .cta-panel h2 {
+                font-size: 1.7rem;
+            }
 
-.cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 28px;
-}
+            .intro-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
 
-.cta-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: 50px;
-    color: var(--text-light);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.cta-btn:hover { background-color: var(--text-light); color: var(--primary-color); }
+            .media-shot {
+                width: min(100%, 320px);
+                margin: 0 auto;
+            }
+        }
 
-/* --- Футер --- */
-footer {
-    padding: 40px 0;
-    text-align: center;
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    font-size: 0.9rem;
-}
-
-.social-icons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.social-link {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #444;
-    color: #fff;
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.social-link:hover { transform: translateY(-5px); }
-.social-link.tg:hover { background: #229ED9; }
-.social-link.wa:hover { background: #25D366; }
-.social-link.inst:hover { background: #C13584; }
-.social-link.vk:hover { background: #0077FF; }
-.social-link.yt:hover { background: #FF0000; }
-.social-link.mail:hover { background: #EA4335; }
-.social-link.channel { background: #fff; color: #1B7DAE; border: 2px solid #229ED9; }
-.social-link.channel:hover { background: #229ED9; color: #fff; }
-.social-link.max { background: #20232a; border: 1px solid #3a3f4b; }
-.social-link.max:hover { background: #2f3440; }
-.max-icon {
-    font-family: "Arial Black", Arial, sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1;
-}
-
-/* --- Адаптив --- */
-@media (max-width: 900px) {
-    .hero-section { padding: 24px 0 56px; }
-    .hero-wrapper { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .hero-image-block { max-width: 320px; }
-    .hero-image-block img { box-shadow: 14px 14px 0 rgba(197, 168, 128, 0.25); }
-    .practices,
-    .guides { grid-template-columns: minmax(0, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .section { padding: 56px 0; }
-    .section-title,
-    .cta h2 { font-size: 2.1rem; }
-    .prose-accent { font-size: 1.7rem; }
-    .practice,
-    .guide { padding: 24px; }
-}
-
-@media (max-width: 400px) {
-    .btn, .btn-outline { padding: 14px 26px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    .social-link:hover { transform: none; }
-}
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
-
 <body>
     <a class="skip-link" href="#main">Перейти к содержимому</a>
 
@@ -544,239 +421,190 @@ footer {
         <symbol id="i-bullhorn" viewBox="0 0 512 512"><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"/></symbol>
     </svg>
 
-    <main id="main">
+    <main class="container" id="main">
+        <div class="top-links">
+            <a href="./index.html">На главную</a>
+        </div>
 
-        <!-- Первый экран -->
-        <header class="hero-section">
-            <div class="container">
-                <a class="back-link" href="index.html"><span aria-hidden="true">←</span> На главную</a>
+        <h1>Ретрит «Огненное сердце Урала»</h1>
+        <p class="lead">▌ 3 дня в местах силы у подножия Иремеля и Зигальги</p>
 
-                <div class="hero-wrapper">
-                    <div class="hero-text">
-                        <h1>Ретрит «Огненное сердце Урала»</h1>
-                        <p class="hero-place">3 дня в местах силы у подножия Иремеля и Зигальги</p>
-
-                        <p class="hero-description">
-                            Три дня, которые перезагрузят тело, прочистят ум и вернут вас к себе настоящей.
-                        </p>
-
-                        <!-- Содержимое блока подставляет retreat-dates.js (запись "fire"): актуальные даты
-                             или, если их нет, только фраза про телефон. Текст ниже виден, только если файл не загрузился. -->
-                        <section class="dates-panel" id="datesPanel" data-retreat-key="fire">
-                            <p style="margin:0">Следующие даты проведения ретритов можно согласовать по телефону: +79173482348</p>
-                        </section>
-
-                        <div class="hero-buttons">
-                            <a href="https://t.me/ILVERA69" class="btn">Забронировать место</a>
-                            <a href="#program" class="btn-outline">Что вас ждет</a>
-                        </div>
-                    </div>
-
-                    <div class="hero-image-block">
-                        <!-- Фото лежит в media/retreat-fire/photo.jpeg (720 × 1280). Если файла нет, блок скрывается сам. -->
-                        <img src="media/retreat-fire/photo.jpeg" alt="Ретрит «Огненное сердце Урала»" width="720" height="1280" fetchpriority="high" decoding="async"
-                             onerror="var b=this.closest('.hero-image-block');b.hidden=true;b.parentNode.classList.add('no-photo')">
-                    </div>
-                </div>
-            </div>
-        </header>
+        <!-- Содержимое блока подставляет retreat-dates.js (запись "fire"): актуальные даты
+             или, если их нет, только фраза про телефон. Текст ниже виден, только если файл не загрузился. -->
+        <section class="dates-panel" id="datesPanel" data-retreat-key="fire">
+            <p style="margin:0">Следующие даты проведения ретритов можно согласовать по телефону: +79173482348</p>
+        </section>
 
         <!-- Вступление -->
-        <section class="section section-white">
-            <div class="container">
-                <div class="prose">
+        <section class="card">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <p><strong>Три дня, которые перезагрузят тело, прочистят ум и вернут вас к себе настоящей.</strong></p>
                     <p>Представьте: горные реки, тишина, воздух, которым дышишь как впервые. У подножия древних гор — Иремеля и Зигальги — там, где сама земля хранит силу, мы создадим пространство для вашего глубокого восстановления.</p>
-                    <p class="prose-accent">Здесь нет суеты. Здесь есть вы — и то, что готово проснуться.</p>
+                    <p><em>Здесь нет суеты. Здесь есть вы — и то, что готово проснуться.</em></p>
                 </div>
+
+                <figure class="media-shot">
+                    <!-- Фото лежит в media/retreat-fire/photo.jpeg (720 × 1280). Если файла нет, блок скрывается сам. -->
+                    <img src="media/retreat-fire/photo.jpeg" alt="Ретрит «Огненное сердце Урала»" width="720" height="1280" decoding="async"
+                         onerror="var f=this.closest('.media-shot');f.hidden=true;f.parentNode.classList.add('no-photo')">
+                </figure>
             </div>
         </section>
 
         <!-- Программа -->
-        <section class="section section-light" id="program">
-            <div class="container">
-                <h2 class="section-title">Что вас ждет</h2>
+        <section class="card" id="program">
+            <h2>▌ Что вас ждет</h2>
 
-                <div class="practices">
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🌅</span> Утро начинается с тишины</h3>
-                        <p>Медитации на рассвете, когда горы еще дышат прохладой, а ум — чист. Йога на Поклонной горе: Сурья Намаскар — приветствие Солнцу, которое пробуждает тело и настраивает на день. Земля под ногами, небо над головой, вы — между ними, в точке силы.</p>
-                    </article>
+            <h3><span aria-hidden="true">🌅</span> Утро начинается с тишины</h3>
+            <p>Медитации на рассвете, когда горы еще дышат прохладой, а ум — чист. Йога на Поклонной горе: Сурья Намаскар — приветствие Солнцу, которое пробуждает тело и настраивает на день. Земля под ногами, небо над головой, вы — между ними, в точке силы.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🔥</span> Огненный массаж — три дня подряд</h3>
-                        <p>Глубокая телесная практика, которая снимает не только мышечные зажимы, но и эмоциональные пласты, годами жившие в теле. Каждый сеанс — это слои: день за днем мы бережно снимаем напряжение, наполняем каждую клетку теплом и жизненной энергией. К третьему дню вы почувствуете не просто легкость — обновление.</p>
-                    </article>
+            <h3><span aria-hidden="true">🔥</span> Огненный массаж — три дня подряд</h3>
+            <p>Глубокая телесная практика, которая снимает не только мышечные зажимы, но и эмоциональные пласты, годами жившие в теле. Каждый сеанс — это слои: день за днем мы бережно снимаем напряжение, наполняем каждую клетку теплом и жизненной энергией. К третьему дню вы почувствуете не просто легкость — обновление.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🫁</span> Дыхательные практики — путь в глубину подсознания</h3>
-                        <p>Работа с запросом через пранаяму, ребёфинг и холотропное дыхание. Это погружение туда, куда ум обычно не пускает. Шаг за шагом — через все зажимы, барьеры и защиты — мы проходим к источнику. И в какой-то момент наступает то самое состояние Сатори: ясность, тишина, растворение границ.</p>
-                        <p>А тело в это время получает то, о чем давно забыло — кислород в каждую клетку и подклетку, до самого центра. Клетки просыпаются. Ткани дышат. Вы дышите.</p>
-                    </article>
+            <h3><span aria-hidden="true">🫁</span> Дыхательные практики — путь в глубину подсознания</h3>
+            <p>Работа с запросом через пранаяму, ребёфинг и холотропное дыхание. Это погружение туда, куда ум обычно не пускает. Шаг за шагом — через все зажимы, барьеры и защиты — мы проходим к источнику. И в какой-то момент наступает то самое состояние Сатори: ясность, тишина, растворение границ.</p>
+            <p>А тело в это время получает то, о чем давно забыло — кислород в каждую клетку и подклетку, до самого центра. Клетки просыпаются. Ткани дышат. Вы дышите.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">💆‍♀️</span> Массаж внутренних органов</h3>
-                        <p>Глубокая работа с фасциями: все спайки и зажимы раскрываются, органы получают свободу, исцеляются и омолаживаются. Тело вспоминает свое природное здоровье — то, которое было с вами от рождения.</p>
-                    </article>
+            <h3><span aria-hidden="true">💆‍♀️</span> Массаж внутренних органов</h3>
+            <p>Глубокая работа с фасциями: все спайки и зажимы раскрываются, органы получают свободу, исцеляются и омолаживаются. Тело вспоминает свое природное здоровье — то, которое было с вами от рождения.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🎶</span> Хрустальные поющие чаши — работа через всю чакральную систему</h3>
-                        <p>Вибрации хрусталя проходят сквозь тело, «выключают внутренний шум» и настраивают вас на вашу истинную частоту. Это не просто расслабление — это раскрытие истинной сути и предназначения. Звук ведет вас по чакральной системе, слой за слоем, к центру — к вашему подлинному «я». Многие отмечают состояние после практики, сравнимое с полноценным 8-часовым сном — только просыпаетесь вы не тем же человеком.</p>
-                    </article>
+            <h3><span aria-hidden="true">🎶</span> Хрустальные поющие чаши — работа через всю чакральную систему</h3>
+            <p>Вибрации хрусталя проходят сквозь тело, «выключают внутренний шум» и настраивают вас на вашу истинную частоту. Это не просто расслабление — это раскрытие истинной сути и предназначения. Звук ведет вас по чакральной системе, слой за слоем, к центру — к вашему подлинному «я». Многие отмечают состояние после практики, сравнимое с полноценным 8-часовым сном — только просыпаетесь вы не тем же человеком.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🌿</span> Моксотерапия и телесные практики</h3>
-                        <p>Прогревание полынными сигарами, массаж стопами «Пятка Будды», массаж лица «Магия молодости» — инструменты, которые усиливают и закрепляют результат.</p>
-                    </article>
+            <h3><span aria-hidden="true">🌿</span> Моксотерапия и телесные практики</h3>
+            <p>Прогревание полынными сигарами, массаж стопами «Пятка Будды», массаж лица «Магия молодости» — инструменты, которые усиливают и закрепляют результат.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🏔️</span> Места силы: Иремель и Зигальга</h3>
-                        <p>Горные реки, чистейший воздух, энергия древних вершин. Земля здесь сама помогает — вам остается только открыться.</p>
-                    </article>
+            <h3><span aria-hidden="true">🏔️</span> Места силы: Иремель и Зигальга</h3>
+            <p>Горные реки, чистейший воздух, энергия древних вершин. Земля здесь сама помогает — вам остается только открыться.</p>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🧖‍♀️</span> Баня</h3>
-                        <p>Жар, пар, вода, тишина. Древний способ очищения, который завершает и закрепляет каждый день ретрита.</p>
-                    </article>
-                </div>
-            </div>
+            <h3><span aria-hidden="true">🧖‍♀️</span> Баня</h3>
+            <p>Жар, пар, вода, тишина. Древний способ очищения, который завершает и закрепляет каждый день ретрита.</p>
         </section>
 
         <!-- Для кого и что увезете -->
-        <section class="section section-white">
-            <div class="container">
-                <div class="prose">
-                    <div class="subsection">
-                        <h2 class="section-title">Для кого это</h2>
-                        <p>Для женщин, которые устали быть «сильными». Для тех, кто чувствует: пора вернуться к себе. Для тех, кто готов к глубокой работе — мягкой, но по-настоящему трансформирующей.</p>
-                    </div>
+        <section class="card">
+            <h2>▌ Для кого это</h2>
+            <p>Для женщин, которые устали быть «сильными». Для тех, кто чувствует: пора вернуться к себе. Для тех, кто готов к глубокой работе — мягкой, но по-настоящему трансформирующей.</p>
 
-                    <div class="subsection">
-                        <h2 class="section-title">Что вы увезете с собой</h2>
-                        <ul class="star-list">
-                            <li>Тело без блоков и зажимов, насыщенное кислородом и обновленное.</li>
-                            <li>Ум без внутреннего шума.</li>
-                            <li>Опыт Сатори — прикосновение к своей истинной природе.</li>
-                            <li>Связь с собой, которую невозможно потерять.</li>
-                            <li>Понимание своего предназначения — через звук, тело, дыхание и тишину гор.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <hr class="divider">
+
+            <h2>▌ Что вы увезете с собой</h2>
+            <ul>
+                <li>Тело без блоков и зажимов, насыщенное кислородом и обновленное.</li>
+                <li>Ум без внутреннего шума.</li>
+                <li>Опыт Сатори — прикосновение к своей истинной природе.</li>
+                <li>Связь с собой, которую невозможно потерять.</li>
+                <li>Понимание своего предназначения — через звук, тело, дыхание и тишину гор.</li>
+            </ul>
         </section>
 
         <!-- Проводники -->
-        <section class="section section-light" id="guides">
-            <div class="container">
-                <h2 class="section-title">Проводники ретрита</h2>
-                <div class="prose">
-                    <p>Вас проведут мягко и бережно в глубину себя два проводника — Ильвера Ситдикова и Рушана Раевская. Мастера, для которых тело, звук, дыхание и земля — это инструменты настоящей трансформации. Их метод — бережно, но глубоко. Мягко, но навсегда.</p>
+        <section class="card" id="guides">
+            <h2>▌ Проводники ретрита</h2>
+            <p>Вас проведут мягко и бережно в глубину себя два проводника — Ильвера Ситдикова и Рушана Раевская. Мастера, для которых тело, звук, дыхание и земля — это инструменты настоящей трансформации. Их метод — бережно, но глубоко. Мягко, но навсегда.</p>
+
+            <hr class="divider">
+
+            <!-- Ильвера -->
+            <article class="guide">
+                <div class="guide-head">
+                    <img class="guide-photo" src="media/reviews/photo.jpg" alt="Ильвера Ситдикова" width="84" height="84" loading="lazy" decoding="async"
+                         onerror="this.hidden=true">
+                    <div>
+                        <h3>Ильвера Ситдикова</h3>
+                        <p class="guide-role">Духовный наставник и целитель</p>
+                    </div>
                 </div>
+                <p>Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.</p>
+                <p>Мастер глубинной трансформации и дыхательных практик.</p>
+                <a class="guide-link" href="./index.html">Подробнее обо мне</a>
+            </article>
 
-                <div class="guides">
-                    <!-- Ильвера -->
-                    <article class="guide">
-                        <div class="guide-head">
-                            <img class="guide-photo" src="media/reviews/photo.jpg" alt="Ильвера Ситдикова" width="84" height="84" loading="lazy" decoding="async"
-                                 onerror="this.hidden=true">
-                            <div>
-                                <h3>Ильвера Ситдикова</h3>
-                                <p class="guide-role">Духовный наставник и целитель</p>
-                            </div>
-                        </div>
-                        <p>Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.</p>
-                        <p>Мастер глубинной трансформации и дыхательных практик.</p>
-                        <a class="guide-link" href="index.html">Подробнее обо мне</a>
-                    </article>
+            <hr class="divider">
 
-                    <!-- Рушана -->
-                    <article class="guide">
-                        <div class="guide-head">
-                            <!-- TODO: положите фото в media/retreat-fire/rushana.jpeg. Пока файла нет, фото скрыто. -->
-                            <img class="guide-photo" src="media/retreat-fire/rushana.jpeg" alt="Рушана Раевская" width="84" height="84" loading="lazy" decoding="async"
-                                 onerror="this.hidden=true">
-                            <div>
-                                <h3>Рушана Раевская</h3>
-                                <p class="guide-role">Духовный проводник, звукотерапевт, телесный терапевт и женский тренер с 30-летним педагогическим стажем</p>
-                            </div>
-                        </div>
-                        <p>Сочетает мягкость с внутренней силой: бережно ведет к пробуждению через тело, звук и энергию.</p>
-
-                        <h4>Телесные практики</h4>
-                        <ul>
-                            <li>Огненный массаж — глубокая работа с мышечными и эмоциональными блоками. Наполняет теплом и силой, возвращает связь с телом.</li>
-                            <li>Моксотерапия — прогревание полынными сигарами. Устраняет застои, снимает спазмы, восстанавливает поток энергии.</li>
-                            <li>Массаж стопами «Пятка Будды», массаж лица «Магия молодости».</li>
-                            <li>Организатор и преподаватель курса «Гейша» (Москва и города России).</li>
-                        </ul>
-
-                        <h4>Звук и голос</h4>
-                        <ul>
-                            <li>Преподаватель вокала и фортепиано (30 лет).</li>
-                            <li>Звукотерапия хрустальными и тибетскими чашами, глюкофоном. Обучение игре.</li>
-                            <li>Эффект: «выключается внутренний шум», вибрации снимают напряжение. Состояние после сеанса сравнимо с полноценным сном.</li>
-                        </ul>
-
-                        <h4>Духовные практики</h4>
-                        <ul>
-                            <li>Духовный проводник и женский тренер. Глубокие женские практики.</li>
-                            <li>15 лет туров в Аркаим, Иремель, Тургояк.</li>
-                        </ul>
-
-                        <p class="guide-essence"><strong>Суть:</strong> мастер, который через тело, звук и древние практики мягко возвращает человека к себе — к силе, гармонии и тишине внутри.</p>
-                    </article>
+            <!-- Рушана -->
+            <article class="guide">
+                <div class="guide-head">
+                    <!-- TODO: положите фото в media/retreat-fire/rushana.jpeg. Пока файла нет, фото скрыто. -->
+                    <img class="guide-photo" src="media/retreat-fire/rushana.jpeg" alt="Рушана Раевская" width="84" height="84" loading="lazy" decoding="async"
+                         onerror="this.hidden=true">
+                    <div>
+                        <h3>Рушана Раевская</h3>
+                        <p class="guide-role">Духовный проводник, звукотерапевт, телесный терапевт и женский тренер с 30-летним педагогическим стажем</p>
+                    </div>
                 </div>
-            </div>
+                <p>Сочетает мягкость с внутренней силой: бережно ведет к пробуждению через тело, звук и энергию.</p>
+
+                <h4>Телесные практики</h4>
+                <ul>
+                    <li>Огненный массаж — глубокая работа с мышечными и эмоциональными блоками. Наполняет теплом и силой, возвращает связь с телом.</li>
+                    <li>Моксотерапия — прогревание полынными сигарами. Устраняет застои, снимает спазмы, восстанавливает поток энергии.</li>
+                    <li>Массаж стопами «Пятка Будды», массаж лица «Магия молодости».</li>
+                    <li>Организатор и преподаватель курса «Гейша» (Москва и города России).</li>
+                </ul>
+
+                <h4>Звук и голос</h4>
+                <ul>
+                    <li>Преподаватель вокала и фортепиано (30 лет).</li>
+                    <li>Звукотерапия хрустальными и тибетскими чашами, глюкофоном. Обучение игре.</li>
+                    <li>Эффект: «выключается внутренний шум», вибрации снимают напряжение. Состояние после сеанса сравнимо с полноценным сном.</li>
+                </ul>
+
+                <h4>Духовные практики</h4>
+                <ul>
+                    <li>Духовный проводник и женский тренер. Глубокие женские практики.</li>
+                    <li>15 лет туров в Аркаим, Иремель, Тургояк.</li>
+                </ul>
+
+                <p class="guide-essence"><strong>Суть:</strong> мастер, который через тело, звук и древние практики мягко возвращает человека к себе — к силе, гармонии и тишине внутри.</p>
+            </article>
         </section>
 
-        <!-- Призыв и контакты Ильверы -->
-        <section class="cta">
-            <div class="container">
-                <h2>Три дня. Одно место. Ваша новая жизнь.</h2>
-                <p>Количество мест ограничено. Это камерный ретрит — глубокая работа требует тишины и пространства.</p>
-                <a href="https://t.me/ILVERA69" class="btn btn-light">Забронировать место и узнать детали</a>
-
-                <div class="cta-actions">
-                    <a class="cta-btn" href="tel:+79173482348">Позвонить: +79173482348</a>
-                    <a class="cta-btn" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Telegram</a>
-                    <a class="cta-btn" href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" target="_blank" rel="noopener noreferrer">MAX</a>
-                    <a class="cta-btn" href="https://vk.ru/id177739125" target="_blank" rel="noopener noreferrer">VK</a>
-                </div>
+        <!-- Запись и контакты -->
+        <section class="cta-panel">
+            <h2>Три дня. Одно место. Ваша новая жизнь.</h2>
+            <p>Количество мест ограничено. Это камерный ретрит — глубокая работа требует тишины и пространства.</p>
+            <p>Забронировать место и узнать детали:</p>
+            <div class="cta-actions">
+                <a class="cta-btn phone" href="tel:+79173482348">Позвонить: +79173482348</a>
+                <a class="cta-btn tg" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a class="cta-btn wa" href="https://wa.me/qr/M2SDO3W56BNOA1" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a class="cta-btn max" href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" target="_blank" rel="noopener noreferrer">MAX</a>
+                <a class="cta-btn vk" href="https://vk.ru/id177739125" target="_blank" rel="noopener noreferrer">VK</a>
             </div>
         </section>
-
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="social-icons">
-                <a href="https://t.me/ILVERA69" class="social-link tg" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram" title="Написать в Telegram">
-                    <svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>
-                </a>
-                <a href="https://t.me/+0lgaxWEGh8gwZTg6" class="social-link channel" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал" title="Telegram-канал">
-                    <svg class="icon" aria-hidden="true"><use href="#i-bullhorn"/></svg>
-                </a>
-                <a href="https://wa.me/qr/M2SDO3W56BNOA1" class="social-link wa" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" title="WhatsApp">
-                    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                </a>
-                <a href="https://instagram.com/sitdikova_ilvera" class="social-link inst" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-                    <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
-                </a>
-                <a href="mailto:ilvera69@mail.ru" class="social-link mail" aria-label="Написать на e-mail" title="E-mail">
-                    <svg class="icon" aria-hidden="true"><use href="#i-envelope"/></svg>
-                </a>
-                <a href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" class="social-link max" target="_blank" rel="noopener noreferrer" aria-label="Написать в MAX" title="MAX">
-                    <span class="max-icon" aria-hidden="true">MAX</span>
-                </a>
-                <a href="https://vk.ru/id177739125" class="social-link vk" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте" title="ВКонтакте">
-                    <svg class="icon" aria-hidden="true"><use href="#i-vk"/></svg>
-                </a>
-                <a href="https://youtube.com/@mommy_dragon?si=_bSPuVhnY9Qzcek5" class="social-link yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
-                    <svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>
-                </a>
-            </div>
-
-            <p id="copyrightText"></p>
+    <footer class="site-footer">
+        <div class="social-icons">
+            <a href="https://t.me/ILVERA69" class="social-link tg" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram" title="Написать в Telegram">
+                <svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>
+            </a>
+            <a href="https://t.me/+0lgaxWEGh8gwZTg6" class="social-link channel" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал" title="Telegram-канал">
+                <svg class="icon" aria-hidden="true"><use href="#i-bullhorn"/></svg>
+            </a>
+            <a href="https://wa.me/qr/M2SDO3W56BNOA1" class="social-link wa" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" title="WhatsApp">
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            </a>
+            <a href="https://instagram.com/sitdikova_ilvera" class="social-link inst" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
+            </a>
+            <a href="mailto:ilvera69@mail.ru" class="social-link mail" aria-label="Написать на e-mail" title="E-mail">
+                <svg class="icon" aria-hidden="true"><use href="#i-envelope"/></svg>
+            </a>
+            <a href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" class="social-link max" target="_blank" rel="noopener noreferrer" aria-label="Написать в MAX" title="MAX">
+                <span class="max-icon" aria-hidden="true">MAX</span>
+            </a>
+            <a href="https://vk.ru/id177739125" class="social-link vk" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте" title="ВКонтакте">
+                <svg class="icon" aria-hidden="true"><use href="#i-vk"/></svg>
+            </a>
+            <a href="https://youtube.com/@mommy_dragon?si=_bSPuVhnY9Qzcek5" class="social-link yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+                <svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>
+            </a>
         </div>
+
+        <p id="copyrightText"></p>
     </footer>
 
     <script src="./retreat-dates.js"></script>
