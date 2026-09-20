@@ -1658,7 +1658,7 @@ button:focus-visible {
         var closeButton = byId('lightboxClose');
         var prevButton = byId('lightboxPrev');
         var nextButton = byId('lightboxNext');
-        var tiles = [];          // плитки, у которых фото загрузилось
+        var tiles = [];          // плитки, которые сейчас есть в галерее
         var lightboxIndex = 0;
         var lastFocused = null;
 
@@ -1684,6 +1684,10 @@ button:focus-visible {
 
         function updateLightbox() {
             var tile = tiles[lightboxIndex];
+            if (!tile) {
+                closeLightbox();
+                return;
+            }
             lightboxImg.src = tile.dataset.src;
             lightboxImg.alt = tile.dataset.alt;
             var single = tiles.length < 2;
@@ -1694,6 +1698,20 @@ button:focus-visible {
         function stepLightbox(delta) {
             lightboxIndex = (lightboxIndex + delta + tiles.length) % tiles.length;
             updateLightbox();
+        }
+
+        function removeTile(tile) {
+            var position = tiles.indexOf(tile);
+            if (position !== -1) {
+                tiles.splice(position, 1);
+            }
+            tile.remove();
+            if (!tiles.length) {
+                section.hidden = true;
+                if (lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            }
         }
 
         function addTile(photo) {
@@ -1708,19 +1726,8 @@ button:focus-visible {
             img.alt = tile.dataset.alt;
             img.loading = 'lazy';
             img.decoding = 'async';
-            img.addEventListener('load', function () {
-                if (tiles.indexOf(tile) === -1) {
-                    tiles.push(tile);
-                    section.hidden = false;
-                }
-            });
-            img.addEventListener('error', function () {
-                var position = tiles.indexOf(tile);
-                if (position !== -1) {
-                    tiles.splice(position, 1);
-                }
-                tile.remove();
-            });
+            // Если файл всё же не открылся, плитка убирается, а при пустой галерее скрывается весь блок
+            img.addEventListener('error', function () { removeTile(tile); });
             tile.addEventListener('click', function () {
                 var position = tiles.indexOf(tile);
                 if (position !== -1) {
@@ -1730,9 +1737,29 @@ button:focus-visible {
             img.src = photo.src;
             tile.appendChild(img);
             grid.appendChild(tile);
+            tiles.push(tile);
         }
 
-        PHOTOS.forEach(addTile);
+        // Есть ли файл на сервере: запрашиваем только заголовки, сами фото при этом не скачиваются.
+        // Если проверить не удалось (открыто с диска, сеть, сервер не отвечает на HEAD), считаем, что файл есть.
+        function photoExists(photo) {
+            if (!window.fetch || window.location.protocol === 'file:') {
+                return Promise.resolve(true);
+            }
+            return window.fetch(photo.src, { method: 'HEAD' }).then(
+                function (response) { return response.ok; },
+                function () { return true; }
+            );
+        }
+
+        Promise.all(PHOTOS.map(photoExists)).then(function (exists) {
+            PHOTOS.forEach(function (photo, index) {
+                if (exists[index]) {
+                    addTile(photo);
+                }
+            });
+            section.hidden = tiles.length === 0;
+        });
 
         closeButton.addEventListener('click', closeLightbox);
         prevButton.addEventListener('click', function () { stepLightbox(-1); });
