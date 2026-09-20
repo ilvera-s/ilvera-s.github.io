@@ -83,11 +83,14 @@
         /* Аватар проводника: круг с рамкой. Фото внутри можно сдвигать и приближать:
            --pos-y  какая часть фото в кадре (0% = верх фото, 100% = низ),
            --zoom   приближение (1 = без приближения),
-           --origin-y  вокруг какой высоты кружка приближать (50% = вокруг центра). */
+           --origin-y  вокруг какой высоты кружка приближать (50% = вокруг центра),
+           --shift-x   сдвиг фото вправо (плюс) или влево (минус), например 10% или -10%,
+           --shift-y   сдвиг вниз (плюс) или вверх (минус).
+           Сдвигать в стороны можно только при приближении: до (zoom − 1) / 2, например при 1.5 — до ±25%. */
         .guide-photo {
             position: relative;
-            width: 84px;
-            height: 84px;
+            width: 100px;
+            height: 100px;
             flex-shrink: 0;
             border-radius: 50%;
             border: 2px solid var(--accent-color);
@@ -101,7 +104,7 @@
             height: 100%;
             object-fit: cover;
             object-position: 50% var(--pos-y, 20%);
-            transform: scale(var(--zoom, 1));
+            transform: translate(var(--shift-x, 0%), var(--shift-y, 0%)) scale(var(--zoom, 1));
             transform-origin: 50% var(--origin-y, 50%);
         }
 
@@ -290,10 +293,10 @@
                     <!-- Ильвера -->
                     <article class="guide">
                         <div class="guide-head">
-                            <!-- Лицо на фото ниже середины: показываем нижнюю часть кадра и приближаем (значения можно менять) -->
+                            <!-- Положение фото в кружке подобрано вручную: --pos-y, --zoom, --origin-y, --shift-x (см. описание в стилях) -->
                             <span class="guide-photo">
                                 <img src="media/masters/ilvera.jpeg" alt="Ильвера Ситдикова" width="100" height="100" loading="lazy" decoding="async"
-                                     style="--pos-y: 75%; --zoom: 1.1; --origin-y: 45%"
+                                     style="--pos-y: 60%; --zoom: 1; --origin-y: 35%; --shift-x: 0%"
                                      onerror="this.parentNode.hidden=true">
                             </span>
                             <div>
@@ -312,7 +315,7 @@
                             <!-- TODO: положите фото в media/masters/rushana.jpeg. Пока файла нет, фото скрыто. -->
                             <span class="guide-photo">
                                 <img src="media/masters/rushana.jpeg" alt="Рушана Раевская" width="100" height="100" loading="lazy" decoding="async"
-                                     style="--pos-y: 55%; --zoom: 1.8; --origin-y: 55%"
+                                     style="--pos-y: 85%; --zoom: 3; --origin-y: 45%; --shift-x: 30%"
                                      onerror="this.parentNode.hidden=true">
                             </span>
                             <div>

@@ -178,140 +178,369 @@ button:focus-visible {
     color: var(--primary-color);
 }
 
-/* --- Первый экран --- */
-.hero-section {
-    min-height: 95vh;
-    min-height: 95svh;
+/* --- Первый экран: красивые виды --- */
+.showcase {
+    position: relative;
     display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    padding: 48px 0;
+    min-height: 92vh;
+    min-height: 92svh;
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    overflow: hidden;
+    isolation: isolate;
 }
 
-.hero-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
+.showcase-slides {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
 }
 
-.hero-text {
-    flex: 1;
-    max-width: 550px;
+.showcase-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.4s ease;
 }
 
-.subtitle {
-    font-family: var(--font-body);
-    color: var(--bronze);
-    font-weight: 800;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 1.2;
-    margin-bottom: 6px;
-}
+.showcase-slide.is-active { opacity: 1; }
 
-.hero-role {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-}
-
-.hero-bio {
-    max-width: 32rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--text-muted);
-    margin-bottom: 18px;
-}
-
-.hero-text h1 {
-    font-size: 2.6rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-.hero-description {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: var(--text-body);
-    margin-bottom: 32px;
-    border-left: 4px solid var(--accent-color);
-    padding-left: 20px;
-}
-
-.hero-description strong {
+.showcase-slide img {
+    width: 100%;
+    height: 100%;
     display: block;
-    margin-top: 10px;
-    color: var(--primary-color);
-    font-weight: 700;
+    object-fit: cover;
+    object-position: var(--pos, center 40%);
 }
 
-.hero-buttons {
+/* Затемнение: текст читается на любом фото */
+.showcase::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(27, 20, 38, 0.55) 0%, rgba(27, 20, 38, 0.2) 38%, rgba(27, 20, 38, 0.82) 100%);
+}
+
+.showcase-inner {
+    flex: 1;
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 28px;
+    padding-bottom: 40px;
 }
 
-.hero-badges {
+.showcase-brand {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.showcase-text { max-width: 760px; margin-top: 48px; }
+
+.showcase-text h1 {
+    font-size: clamp(2.5rem, 6.2vw, 4.4rem);
+    line-height: 1.04;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.showcase-lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.showcase-lead strong { display: block; margin-top: 8px; }
+
+.showcase-buttons { display: flex; flex-wrap: wrap; gap: 15px; }
+
+.showcase-nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 16px;
-    margin-top: 32px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
+    gap: 10px 12px;
+    max-width: 660px;
+    margin-top: 40px;
 }
 
-.hero-badge {
-    display: inline-flex;
+.showcase-nav a {
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 50px;
-    padding: 10px 18px;
+    min-height: 48px;
+    padding: 10px 16px;
     border-radius: 50px;
-    background: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.14);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: var(--text-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-align: center;
+    text-transform: uppercase;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
-.hero-badge:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-    color: var(--primary-color);
-}
+.showcase-nav a:hover { background: rgba(255, 255, 255, 0.28); }
 
-.hero-image-block {
-    flex: 1;
-    max-width: 500px;
+.showcase-dots {
+    position: absolute;
+    top: 22px;
+    right: 14px;
     display: flex;
-    justify-content: flex-start;
 }
 
-.hero-image-block img {
+.showcase-dot {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.showcase-dot::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.showcase-dot[aria-current="true"]::before {
+    background: #fff;
+    transform: scale(1.3);
+}
+
+/* --- Места силы: карусель --- */
+.places {
+    padding: 72px 0;
+    background-color: var(--bg-light);
+    overflow: hidden;
+}
+
+.places .section-title { margin-bottom: 12px; }
+
+.section-lead {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.carousel {
+    --gap: 14px;
+    /* отступ по краям: на широком экране совпадает с рамкой сайта (1160px), на телефоне 20px */
+    --pad: max(20px, calc((100% - 1160px) / 2));
+    --slide-ratio: 4 / 5;      /* форма карточки на телефоне: вертикальная */
+    position: relative;
+}
+
+.carousel-track {
+    position: relative;
+    display: flex;
+    gap: var(--gap);
+    padding: 6px var(--pad) 10px;
+    scroll-padding-inline: var(--pad);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* Телефон: одно фото, край следующего виден — сразу понятно, что можно листать */
+.place {
+    flex: 0 0 min(78vw, 420px);
+    aspect-ratio: var(--slide-ratio);
+    position: relative;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #e9e4ef;
+    cursor: zoom-in;
+    scroll-snap-align: start;
+}
+
+.place img {
+    display: block;
     width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 25px 25px 0 rgba(197, 168, 128, 0.25);
+    height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
-/* --- Обо мне --- */
+.carousel-arrow {
+    position: absolute;
+    top: calc(50% - 4px);
+    z-index: 2;
+    display: none;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0 0 4px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--primary-color);
+    font-size: 1.9rem;
+    line-height: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: opacity 0.2s ease;
+}
+
+.carousel-arrow:disabled { opacity: 0; pointer-events: none; }
+.carousel-prev { left: max(8px, calc(var(--pad) - 24px)); }
+.carousel-next { right: max(8px, calc(var(--pad) - 24px)); }
+
+.carousel-dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.carousel-dot {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.carousel-dot::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(74, 59, 94, 0.28);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dot[aria-current="true"]::before {
+    background: var(--primary-color);
+    transform: scale(1.3);
+}
+
+/* Планшет и компьютер: два, затем три фото рядом, горизонтальные карточки */
+@media (min-width: 700px) {
+    .carousel { --slide-ratio: 4 / 3; }
+    .place { flex-basis: calc((100% - var(--gap)) / 2); }
+    .carousel-arrow { display: grid; }
+}
+
+@media (min-width: 1000px) {
+    .place { flex-basis: calc((100% - 2 * var(--gap)) / 3); }
+}
+
+/* Просмотр фото */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(20, 14, 30, 0.92);
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox-img {
+    max-width: min(92vw, 1200px);
+    max-height: 86vh;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-close,
+.lightbox-nav {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover { background: rgba(255, 255, 255, 0.3); }
+
+.lightbox-close { top: 18px; right: 18px; }
+.lightbox-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 18px; top: 50%; transform: translateY(-50%); }
+
+/* --- Знакомство с мастером --- */
 .about-section {
     padding: 80px 0;
     background-color: #fff;
 }
 
-.about-content {
-    max-width: 800px;
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+    max-width: 1040px;
     margin: 0 auto;
-    border-left: 5px solid var(--accent-color);
-    padding-left: 30px;
+}
+
+.about-layout.no-photo {
+    grid-template-columns: minmax(0, 800px);
+    justify-content: center;
+}
+
+.about-photo {
+    position: sticky;
+    top: 24px;
+    margin: 0;
+}
+
+.about-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 18px 18px 0 rgba(197, 168, 128, 0.25);
+    object-fit: cover;
+}
+
+.about-kicker {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bronze);
+}
+
+.about-role {
+    margin: 4px 0 28px;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .about-title {
@@ -328,9 +557,7 @@ button:focus-visible {
     margin: 44px 0 16px;
 }
 
-.about-list {
-    list-style: none;
-}
+.about-list { list-style: none; }
 
 .about-list li {
     position: relative;
@@ -407,6 +634,40 @@ button:focus-visible {
 .service-card ul li {
     margin-bottom: 8px;
     font-size: 0.95rem;
+}
+
+.services .section-title { margin-bottom: 24px; }
+
+.directions-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.directions-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 10px 24px;
+    border: 1px solid rgba(74, 59, 94, 0.15);
+    border-radius: 50px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.directions-nav a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 .service-title-link {
@@ -732,67 +993,27 @@ button:focus-visible {
 }
 
 @media (max-width: 900px) {
-    .hero-section {
-        min-height: auto;
-        padding: 40px 0 56px;
+    .showcase-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .about-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
     }
 
-    .hero-wrapper {
-        flex-direction: column-reverse; /* фото сверху, текст снизу */
-        gap: 28px;
-        text-align: center;
-    }
-
-    .hero-text {
-        max-width: 100%;
-    }
-
-    .subtitle {
-        font-size: 1.5rem;
-    }
-
-    .hero-text h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero-description {
-        max-width: 34rem;
-        margin-left: auto;
-        margin-right: auto;
-        border-left: none;
-        padding-left: 0;
-        text-align: left;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-badges {
-        max-width: 560px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Фото компактнее, чтобы кнопка «Записаться» была ближе к первому экрану */
-    .hero-image-block {
-        width: min(260px, 70%);
+    .about-photo {
+        position: static;
+        width: min(300px, 80%);
         margin: 0 auto;
-    }
-
-    .hero-image-block img {
-        box-shadow: 14px 14px 0 rgba(197, 168, 128, 0.25);
     }
 }
 
 @media (max-width: 768px) {
+    .showcase-text { margin-top: 32px; }
+    .showcase-lead { font-size: 1.1rem; }
+    .places { padding: 56px 0; }
+
     .about-section {
         padding: 56px 0;
-    }
-
-    .about-content {
-        border-left: none;
-        padding-left: 0;
     }
 
     .about-title,
@@ -800,6 +1021,8 @@ button:focus-visible {
     .cta h2 {
         font-size: 2.1rem;
     }
+
+    .about-subtitle { font-size: 1.6rem; }
 
     .gallery-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -839,12 +1062,15 @@ button:focus-visible {
     .video-modal-title {
         font-size: 1.2rem;
     }
+
+    .lightbox { padding: 12px; }
+    .lightbox-nav { width: 40px; height: 40px; }
+    .lightbox-prev { left: 8px; }
+    .lightbox-next { right: 8px; }
 }
 
 @media (max-width: 400px) {
-    .hero-badges {
-        grid-template-columns: 1fr;
-    }
+    .showcase-nav { grid-template-columns: 1fr; }
 
     .btn,
     .btn-outline {
@@ -862,7 +1088,7 @@ button:focus-visible {
     }
 
     .service-card:hover,
-    .hero-badge:hover,
+    .directions-nav a:hover,
     .preview-video-btn:hover {
         transform: none;
     }
@@ -873,65 +1099,68 @@ button:focus-visible {
 <body>
     <a class="skip-link" href="#main">Перейти к содержимому</a>
 
-    <!-- Иконки: Font Awesome Free 6 (fontawesome.com), лицензия CC BY 4.0 — https://fontawesome.com/license/free -->
-    <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="i-telegram" viewBox="0 0 496 512"><path d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"/></symbol>
-    </svg>
-
     <main id="main">
 
-        <!-- Первый экран -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-wrapper">
+        <!-- Первый экран: виды. Фото подставляет скрипт внизу страницы (список PHOTOS). -->
+        <header class="showcase" id="top">
+            <div class="showcase-slides" id="showcaseSlides" aria-hidden="true"></div>
+            <div class="showcase-dots" id="showcaseDots" role="group" aria-label="Фото"></div>
 
-                    <!-- Левая колонка -->
-                    <div class="hero-text">
-                        <p class="subtitle">Ильвера Ситдикова</p>
-                        <p class="hero-role">Духовный наставник и целитель</p>
-                        <p class="hero-bio">Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.</p>
-                        <h1>Раскрой свою внутреннюю силу</h1>
+            <div class="container showcase-inner">
+                <p class="showcase-brand">Ильвера Ситдикова</p>
 
-                        <p class="hero-description">
-                            Помогу восстановить состояние и сбалансировать сферы жизни.
-                            <strong>Готов(а) шагнуть в трансформацию со мной?</strong>
+                <div>
+                    <div class="showcase-text">
+                        <h1>Трансформационные ретриты в Местах Силы</h1>
+                        <p class="showcase-lead">
+                            Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.
+                            <strong>Готов(а) шагнуть в трансформацию с нами?</strong>
                         </p>
-
-                        <div class="hero-buttons">
-                            <a href="https://t.me/ILVERA69" class="btn">Записаться</a>
-                            <a href="https://t.me/+0lgaxWEGh8gwZTg6" class="btn-outline" target="_blank" rel="noopener noreferrer">
-                                <svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>
-                                Мой канал
-                            </a>
+                        <div class="showcase-buttons">
+                            <a href="https://t.me/ILVERA69" class="btn btn-light">Записаться</a>
+                            <a href="#about" class="btn btn-outline-light">Об Ильвере</a>
                         </div>
-
-                        <nav class="hero-badges" aria-label="Направления работы">
-                            <a href="mentor.html" class="hero-badge">💎 Наставничество</a>
-                            <a href="lead-casting.html" class="hero-badge">💧 Отливка свинцом</a>
-                            <a href="iremel.html" class="hero-badge">⛰️ Иремель</a>
-                            <a href="retreat-family.html" class="hero-badge">🌿 Семейный ретрит — Сила рода</a>
-                            <a href="retreat-power.html" class="hero-badge">🧭 Ретрит для мастеров — Познай свою силу</a>
-                            <a href="retreat-fire.html" class="hero-badge">🔥 Огненный ретрит</a>
-                        </nav>
                     </div>
 
-                    <!-- Правая колонка -->
-                    <div class="hero-image-block">
-                        <!-- width и height — реальные размеры файла в пикселях (сейчас 960 × 1280).
-                             По ним браузер заранее резервирует место, и страница не «прыгает» при загрузке.
-                             Если замените фото на другое, обновите эти два числа. Если забудете, ничего не сломается:
-                             картинка всё равно покажется в своих пропорциях, просто при загрузке чуть сдвинется текст. -->
-                        <img src="media/masters/ilvera.jpeg" alt="Ильвера Ситдикова" width="960" height="1280" fetchpriority="high" decoding="async">
-                    </div>
-
+                    <nav class="showcase-nav" aria-label="Ретриты">
+                <a href="iremel.html">⛰️ Иремель</a>
+                <a href="retreat-family.html">🌿 Семейный ретрит — Сила рода</a>
+                <a href="retreat-power.html">🧭 Ретрит для мастеров — Познай свою силу</a>
+                <a href="retreat-fire.html">🔥 Огненный ретрит</a>
+                    </nav>
                 </div>
             </div>
+        </header>
+
+        <!-- Места силы: карусель. Слайды создаёт скрипт из списка PHOTOS; пока фото не проверены, блок скрыт -->
+        <section class="places" id="places" hidden aria-label="Места силы">
+            <div class="container">
+                <h2 class="section-title">Места силы</h2>
+                <p class="section-lead">Ретриты проходят у подножия Иремеля и Зигальги</p>
+            </div>
+
+            <div class="carousel">
+                <button type="button" class="carousel-arrow carousel-prev" id="placesPrev" aria-label="Предыдущее фото">&#8249;</button>
+                <div class="carousel-track" id="placesTrack" tabindex="0" role="region" aria-label="Фото мест силы. Листайте вбок"></div>
+                <button type="button" class="carousel-arrow carousel-next" id="placesNext" aria-label="Следующее фото">&#8250;</button>
+            </div>
+
+            <div class="carousel-dots" id="placesDots" role="group" aria-label="Выбор фото"></div>
         </section>
 
-        <!-- Обо мне -->
-        <section class="about-section">
+        <!-- Знакомство с мастером -->
+        <section class="about-section" id="about">
             <div class="container">
-                <div class="about-content">
+                <div class="about-layout">
+                    <figure class="about-photo">
+                        <!-- width и height — реальные размеры файла (сейчас 960 × 1280); при замене фото обновите числа -->
+                        <img src="media/masters/ilvera.jpeg" alt="Ильвера Ситдикова" width="960" height="1280" loading="lazy" decoding="async"
+                             onerror="var f=this.closest('.about-photo');f.hidden=true;f.parentNode.classList.add('no-photo')">
+                    </figure>
+
+                    <div class="about-content">
+                        <p class="about-kicker">Ильвера Ситдикова</p>
+                        <p class="about-role">Духовный наставник и целитель</p>
                     <h2 class="about-title">Давай знакомиться</h2>
                     <ul class="about-list">
                         <li>Мастер глубинной трансформации и дыхательных практик.</li>
@@ -968,14 +1197,21 @@ button:focus-visible {
                     </p>
                     <p class="about-note">Я не создаю иллюзию духовных проработок. Я иду в корень — туда, где когда-то создался блок, зажим.</p>
                     <p class="about-note">Доверившись моему дару яснознания и ясновидения, ты сделаешь шаг к освобождению от боли прошлого и обретению счастья и свободы в настоящем. Начни своё преобразование уже сегодня!</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Услуги -->
-        <section class="services">
+        <section class="services" id="directions">
             <div class="container">
                 <h2 class="section-title">Чем я могу помочь?</h2>
+
+                <nav class="directions-nav" aria-label="Наставничество и отливка свинцом">
+                    <a href="mentor.html">💎 Наставничество</a>
+                    <a href="lead-casting.html">💧 Отливка свинцом</a>
+                </nav>
+
                 <div class="services-grid">
                     <div class="service-card">
                         <h3><a href="mentor.html" class="service-title-link">💎 Наставничество</a></h3>
@@ -1002,15 +1238,6 @@ button:focus-visible {
                             <li>Решение конфликтов</li>
                             <li>Улучшение отношений</li>
                             <li>Снятие эмоционального напряжения</li>
-                        </ul>
-                    </div>
-                    <div class="service-card">
-                        <h3>⛰️ Ретриты и Места Силы</h3>
-                        <ul>
-                            <li><a href="iremel.html">Иремель</a></li>
-                            <li><a href="retreat-family.html">Семейный ретрит — Сила рода</a></li>
-                            <li><a href="retreat-power.html">Ретрит для мастеров — Познай свою силу</a></li>
-                            <li><a href="retreat-fire.html">Огненный ретрит — «Огненное сердце Урала»</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1078,6 +1305,14 @@ button:focus-visible {
         </div>
     </div>
 
+
+    <!-- Просмотр фото -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото" aria-hidden="true">
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Закрыть">&times;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Предыдущее фото">&#8249;</button>
+        <img class="lightbox-img" id="lightboxImg" alt="">
+        <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее фото">&#8250;</button>
+    </div>
 
     <!-- Данные отзывов должны подключаться раньше основного скрипта -->
     <script src="media/reviews/reviews-data.js"></script>
@@ -1395,6 +1630,378 @@ button:focus-visible {
         }
     });
 })();
+    </script>
+    <script>
+    /*
+     * Виды на главной: слайдшоу на первом экране и галерея «Места силы».
+     * Оба берут фото из ОДНОГО списка PHOTOS: правьте только его.
+     *   src      — путь к фото
+     *   hero     — true: фото показывается и в слайдшоу на первом экране
+     *   position — какая часть фото остаётся в кадре при обрезке на первом экране (по умолчанию "center 40%")
+     *   alt      — подпись для скринридеров (необязательно)
+     * Фото, которых нет на сервере, пропускаются сами.
+     */
+    (function () {
+        'use strict';
+
+        var PHOTOS = [
+            { src: 'media/iremel/photo_2.jpeg', hero: true, position: 'center 45%' },
+            { src: 'media/iremel/photo_3.jpeg', hero: true },
+            { src: 'media/iremel/photo_4.jpeg', hero: true },
+            { src: 'media/iremel/photo_5.jpeg' },
+            { src: 'media/iremel/photo_6.jpeg' },
+            { src: 'media/iremel/photo_7.jpeg', hero: true },
+            { src: 'media/iremel/photo_8.jpeg' }
+        ];
+        var DEFAULT_ALT = 'Места силы: Иремель';
+        var SLIDE_INTERVAL_MS = 7000;
+
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var byId = function (id) { return document.getElementById(id); };
+
+        /* ---------- Слайдшоу на первом экране ---------- */
+        var slidesBox = byId('showcaseSlides');
+        var dotsBox = byId('showcaseDots');
+        var slides = [];
+        var current = -1;
+        var timer = null;
+        var stoppedByUser = false;
+
+        function renderDots() {
+            dotsBox.innerHTML = '';
+            if (slides.length < 2) {
+                return;
+            }
+            slides.forEach(function (slide, index) {
+                var dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'showcase-dot';
+                dot.setAttribute('aria-label', 'Фото ' + (index + 1) + ' из ' + slides.length);
+                dot.setAttribute('aria-current', index === current ? 'true' : 'false');
+                dot.addEventListener('click', function () {
+                    stoppedByUser = true;
+                    stopTimer();
+                    show(index);
+                });
+                dotsBox.appendChild(dot);
+            });
+        }
+
+        function show(index) {
+            if (!slides.length) {
+                return;
+            }
+            current = (index + slides.length) % slides.length;
+            slides.forEach(function (slide, i) {
+                slide.classList.toggle('is-active', i === current);
+            });
+            Array.prototype.forEach.call(dotsBox.children, function (dot, i) {
+                dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+            });
+        }
+
+        function stopTimer() {
+            if (timer) {
+                window.clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function startTimer() {
+            if (reducedMotion || stoppedByUser || slides.length < 2 || timer) {
+                return;
+            }
+            timer = window.setInterval(function () { show(current + 1); }, SLIDE_INTERVAL_MS);
+        }
+
+        function addSlide(photo) {
+            var slide = document.createElement('div');
+            slide.className = 'showcase-slide';
+            slide.style.setProperty('--pos', photo.position || 'center 40%');
+
+            var img = document.createElement('img');
+            img.alt = '';
+            img.decoding = 'async';
+            img.addEventListener('load', function () {
+                if (slides.indexOf(slide) === -1) {
+                    slides.push(slide);
+                    renderDots();
+                    if (current === -1) {
+                        show(0);
+                    }
+                    startTimer();
+                }
+            });
+            img.addEventListener('error', function () {
+                var position = slides.indexOf(slide);
+                if (position !== -1) {
+                    slides.splice(position, 1);
+                    if (current >= slides.length) {
+                        current = 0;
+                    }
+                    renderDots();
+                    show(current);
+                }
+                slide.remove();
+            });
+            img.src = photo.src;
+            slide.appendChild(img);
+            slidesBox.appendChild(slide);
+        }
+
+        PHOTOS.filter(function (p) { return p.hero; }).forEach(addSlide);
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                stopTimer();
+            } else {
+                startTimer();
+            }
+        });
+
+        /* ---------- Карусель «Места силы» и просмотр фото ---------- */
+        var section = byId('places');
+        var track = byId('placesTrack');
+        var dotsHolder = byId('placesDots');
+        var prevArrow = byId('placesPrev');
+        var nextArrow = byId('placesNext');
+        var lightbox = byId('lightbox');
+        var lightboxImg = byId('lightboxImg');
+        var closeButton = byId('lightboxClose');
+        var prevButton = byId('lightboxPrev');
+        var nextButton = byId('lightboxNext');
+        var tiles = [];          // слайды, которые сейчас есть в карусели
+        var lightboxIndex = 0;
+        var lastFocused = null;
+
+        function openLightbox(index) {
+            lastFocused = document.activeElement;
+            lightboxIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            closeButton.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.removeProperty('overflow');
+            lightboxImg.removeAttribute('src');
+            if (lastFocused && typeof lastFocused.focus === 'function') {
+                lastFocused.focus();
+            }
+        }
+
+        function updateLightbox() {
+            var tile = tiles[lightboxIndex];
+            if (!tile) {
+                closeLightbox();
+                return;
+            }
+            lightboxImg.src = tile.dataset.src;
+            lightboxImg.alt = tile.dataset.alt;
+            var single = tiles.length < 2;
+            prevButton.hidden = single;
+            nextButton.hidden = single;
+        }
+
+        function stepLightbox(delta) {
+            lightboxIndex = (lightboxIndex + delta + tiles.length) % tiles.length;
+            updateLightbox();
+        }
+
+        /* --- Прокрутка карусели --- */
+        function leftPadding() {
+            return tiles.length ? tiles[0].offsetLeft : 0;
+        }
+
+        function targetLeft(index) {
+            return tiles[index].offsetLeft - leftPadding();
+        }
+
+        // Слайд, который сейчас ближе всего к левому краю
+        function nearestIndex() {
+            var best = 0;
+            var bestDistance = Infinity;
+            tiles.forEach(function (tile, index) {
+                var distance = Math.abs(targetLeft(index) - track.scrollLeft);
+                if (distance < bestDistance) {
+                    best = index;
+                    bestDistance = distance;
+                }
+            });
+            return best;
+        }
+
+        function goTo(index) {
+            if (!tiles.length) {
+                return;
+            }
+            var left = targetLeft(Math.max(0, Math.min(tiles.length - 1, index)));
+            if (typeof track.scrollTo === 'function') {
+                track.scrollTo({ left: left });
+            } else {
+                track.scrollLeft = left;
+            }
+        }
+
+        function updateControls() {
+            if (!tiles.length) {
+                return;
+            }
+            var atStart = track.scrollLeft <= 1;
+            var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+            var index = atEnd ? tiles.length - 1 : nearestIndex();
+            Array.prototype.forEach.call(dotsHolder.children, function (dot, i) {
+                dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+            });
+            prevArrow.disabled = atStart;
+            nextArrow.disabled = atEnd;
+        }
+
+        // Перерисовывает точки и подписи после любого изменения набора слайдов
+        function refresh() {
+            dotsHolder.innerHTML = '';
+            tiles.forEach(function (tile, index) {
+                tile.setAttribute('aria-label', 'Открыть фото ' + (index + 1) + ' из ' + tiles.length);
+                if (tiles.length > 1) {
+                    var dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'carousel-dot';
+                    dot.setAttribute('aria-label', 'Фото ' + (index + 1) + ' из ' + tiles.length);
+                    dot.addEventListener('click', function () { goTo(index); });
+                    dotsHolder.appendChild(dot);
+                }
+            });
+            prevArrow.hidden = nextArrow.hidden = tiles.length < 2;
+            updateControls();
+        }
+
+        var ticking = false;
+        track.addEventListener('scroll', function () {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    ticking = false;
+                    updateControls();
+                });
+            }
+        }, { passive: true });
+        window.addEventListener('resize', updateControls);
+
+        prevArrow.addEventListener('click', function () { goTo(nearestIndex() - 1); });
+        nextArrow.addEventListener('click', function () { goTo(nearestIndex() + 1); });
+
+        track.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                goTo(nearestIndex() - 1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                goTo(nearestIndex() + 1);
+            }
+        });
+
+        /* --- Слайды --- */
+        function removeTile(tile) {
+            var position = tiles.indexOf(tile);
+            if (position !== -1) {
+                tiles.splice(position, 1);
+            }
+            tile.remove();
+            if (!tiles.length) {
+                section.hidden = true;
+                if (lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            } else {
+                refresh();
+            }
+        }
+
+        function addTile(photo) {
+            var tile = document.createElement('button');
+            tile.type = 'button';
+            tile.className = 'place';
+            tile.dataset.src = photo.src;
+            tile.dataset.alt = photo.alt || DEFAULT_ALT;
+
+            var img = document.createElement('img');
+            img.alt = tile.dataset.alt;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            // Если файл всё же не открылся, слайд убирается, а при пустой карусели скрывается весь блок
+            img.addEventListener('error', function () { removeTile(tile); });
+            tile.addEventListener('click', function () {
+                var position = tiles.indexOf(tile);
+                if (position !== -1) {
+                    openLightbox(position);
+                }
+            });
+            img.src = photo.src;
+            tile.appendChild(img);
+            track.appendChild(tile);
+            tiles.push(tile);
+        }
+
+        // Есть ли файл на сервере: запрашиваем только заголовки, сами фото при этом не скачиваются.
+        // Если проверить не удалось (открыто с диска, сеть, сервер не отвечает на HEAD), считаем, что файл есть.
+        function photoExists(photo) {
+            if (!window.fetch || window.location.protocol === 'file:') {
+                return Promise.resolve(true);
+            }
+            return window.fetch(photo.src, { method: 'HEAD' }).then(
+                function (response) { return response.ok; },
+                function () { return true; }
+            );
+        }
+
+        Promise.all(PHOTOS.map(photoExists)).then(function (exists) {
+            PHOTOS.forEach(function (photo, index) {
+                if (exists[index]) {
+                    addTile(photo);
+                }
+            });
+            section.hidden = tiles.length === 0;
+            refresh();
+        });
+
+        closeButton.addEventListener('click', closeLightbox);
+        prevButton.addEventListener('click', function () { stepLightbox(-1); });
+        nextButton.addEventListener('click', function () { stepLightbox(1); });
+        lightbox.addEventListener('click', function (event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (!lightbox.classList.contains('active')) {
+                return;
+            }
+            if (event.key === 'Escape') {
+                closeLightbox();
+            } else if (event.key === 'ArrowLeft' && tiles.length > 1) {
+                stepLightbox(-1);
+            } else if (event.key === 'ArrowRight' && tiles.length > 1) {
+                stepLightbox(1);
+            } else if (event.key === 'Tab') {
+                // фокус остаётся внутри окна просмотра
+                var focusable = [closeButton, prevButton, nextButton].filter(function (b) { return !b.hidden; });
+                var first = focusable[0];
+                var last = focusable[focusable.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+    })();
     </script>
     <script src="site-footer.js"></script>
 </body>
