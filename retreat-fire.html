@@ -80,14 +80,29 @@
             margin-bottom: 18px;
         }
 
+        /* Аватар проводника: круг с рамкой. Фото внутри можно сдвигать и приближать:
+           --pos-y  какая часть фото в кадре (0% = верх фото, 100% = низ),
+           --zoom   приближение (1 = без приближения),
+           --origin-y  вокруг какой высоты кружка приближать (50% = вокруг центра). */
         .guide-photo {
+            position: relative;
             width: 84px;
             height: 84px;
             flex-shrink: 0;
             border-radius: 50%;
             border: 2px solid var(--accent-color);
+            overflow: hidden;
+            background: #ece7f2;
+        }
+
+        .guide-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            object-position: top;
+            object-position: 50% var(--pos-y, 20%);
+            transform: scale(var(--zoom, 1));
+            transform-origin: 50% var(--origin-y, 50%);
         }
 
         .guide h3 { font-size: 1.8rem; line-height: 1.1; color: var(--primary-color); }
@@ -275,8 +290,12 @@
                     <!-- Ильвера -->
                     <article class="guide">
                         <div class="guide-head">
-                            <img class="guide-photo" src="media/masters/ilvera.jpg" alt="Ильвера Ситдикова" width="84" height="84" loading="lazy" decoding="async"
-                                 onerror="this.hidden=true">
+                            <!-- Лицо на фото ниже середины: показываем нижнюю часть кадра и приближаем (значения можно менять) -->
+                            <span class="guide-photo">
+                                <img src="media/masters/ilvera.jpeg" alt="Ильвера Ситдикова" width="100" height="100" loading="lazy" decoding="async"
+                                     style="--pos-y: 75%; --zoom: 1.1; --origin-y: 45%"
+                                     onerror="this.parentNode.hidden=true">
+                            </span>
                             <div>
                                 <h3>Ильвера Ситдикова</h3>
                                 <p class="guide-role">Духовный наставник и целитель</p>
@@ -290,9 +309,12 @@
                     <!-- Рушана -->
                     <article class="guide">
                         <div class="guide-head">
-                            <!-- TODO: положите фото в media/masters/rushana.jpg. Пока файла нет, фото скрыто. -->
-                            <img class="guide-photo" src="media/masters/rushana.jpg" alt="Рушана Раевская" width="84" height="84" loading="lazy" decoding="async"
-                                 onerror="this.hidden=true">
+                            <!-- TODO: положите фото в media/masters/rushana.jpeg. Пока файла нет, фото скрыто. -->
+                            <span class="guide-photo">
+                                <img src="media/masters/rushana.jpeg" alt="Рушана Раевская" width="100" height="100" loading="lazy" decoding="async"
+                                     style="--pos-y: 55%; --zoom: 1.8; --origin-y: 55%"
+                                     onerror="this.parentNode.hidden=true">
+                            </span>
                             <div>
                                 <h3>Рушана Раевская</h3>
                                 <p class="guide-role">Духовный проводник, звукотерапевт, телесный терапевт и женский тренер с 30-летним педагогическим стажем</p>

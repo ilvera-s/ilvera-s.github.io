@@ -16,7 +16,7 @@
     <meta property="og:description" content="Индивидуальные сессии, дыхательные практики, ментальные расстановки и сопровождение трансформации.">
     <!-- TODO: укажите полный адрес сайта и картинки (нужен абсолютный URL), затем раскомментируйте:
     <meta property="og:url" content="https://ВАШ-ДОМЕН/">
-    <meta property="og:image" content="https://ВАШ-ДОМЕН/media/masters/ilvera.jpg">
+    <meta property="og:image" content="https://ВАШ-ДОМЕН/media/masters/ilvera.jpeg">
     -->
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%234A3B5E%22/%3E%3Cpath d=%22M32 10l5.5 16.5L54 32l-16.5 5.5L32 54l-5.5-16.5L10 32l16.5-5.5z%22 fill=%22%23C5A880%22/%3E%3C/svg%3E" type="image/svg+xml">
@@ -241,7 +241,7 @@ button:focus-visible {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
-.showcase-text { max-width: 720px; margin-top: 48px; }
+.showcase-text { max-width: 760px; margin-top: 48px; }
 
 .showcase-text h1 {
     font-size: clamp(2.5rem, 6.2vw, 4.4rem);
@@ -323,10 +323,11 @@ button:focus-visible {
     transform: scale(1.3);
 }
 
-/* --- Места силы (галерея видов) --- */
+/* --- Места силы: карусель --- */
 .places {
     padding: 72px 0;
     background-color: var(--bg-light);
+    overflow: hidden;
 }
 
 .places .section-title { margin-bottom: 12px; }
@@ -339,34 +340,118 @@ button:focus-visible {
     color: var(--text-muted);
 }
 
-.places-grid {
-    column-count: 3;
-    column-gap: 14px;
+.carousel {
+    --gap: 14px;
+    /* отступ по краям: на широком экране совпадает с рамкой сайта (1160px), на телефоне 20px */
+    --pad: max(20px, calc((100% - 1160px) / 2));
+    --slide-ratio: 4 / 5;      /* форма карточки на телефоне: вертикальная */
+    position: relative;
 }
 
-.place {
+.carousel-track {
     position: relative;
-    display: block;
-    width: 100%;
-    min-height: 140px;
-    margin: 0 0 14px;
+    display: flex;
+    gap: var(--gap);
+    padding: 6px var(--pad) 10px;
+    scroll-padding-inline: var(--pad);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* Телефон: одно фото, край следующего виден — сразу понятно, что можно листать */
+.place {
+    flex: 0 0 min(78vw, 420px);
+    aspect-ratio: var(--slide-ratio);
+    position: relative;
     padding: 0;
     border: 0;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: #e9e4ef;
     cursor: zoom-in;
-    break-inside: avoid;
+    scroll-snap-align: start;
 }
 
 .place img {
     display: block;
     width: 100%;
-    height: auto;
-    transition: transform 0.5s ease;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-.place:hover img { transform: scale(1.03); }
+.carousel-arrow {
+    position: absolute;
+    top: calc(50% - 4px);
+    z-index: 2;
+    display: none;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0 0 4px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--primary-color);
+    font-size: 1.9rem;
+    line-height: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: opacity 0.2s ease;
+}
+
+.carousel-arrow:disabled { opacity: 0; pointer-events: none; }
+.carousel-prev { left: max(8px, calc(var(--pad) - 24px)); }
+.carousel-next { right: max(8px, calc(var(--pad) - 24px)); }
+
+.carousel-dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.carousel-dot {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.carousel-dot::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(74, 59, 94, 0.28);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dot[aria-current="true"]::before {
+    background: var(--primary-color);
+    transform: scale(1.3);
+}
+
+/* Планшет и компьютер: два, затем три фото рядом, горизонтальные карточки */
+@media (min-width: 700px) {
+    .carousel { --slide-ratio: 4 / 3; }
+    .place { flex-basis: calc((100% - var(--gap)) / 2); }
+    .carousel-arrow { display: grid; }
+}
+
+@media (min-width: 1000px) {
+    .place { flex-basis: calc((100% - 2 * var(--gap)) / 3); }
+}
 
 /* Просмотр фото */
 .lightbox {
@@ -455,15 +540,8 @@ button:focus-visible {
 }
 
 .about-role {
-    margin: 4px 0 8px;
+    margin: 4px 0 28px;
     font-weight: 500;
-    color: var(--text-muted);
-}
-
-.about-bio {
-    margin-bottom: 28px;
-    font-size: 0.98rem;
-    line-height: 1.5;
     color: var(--text-muted);
 }
 
@@ -884,7 +962,6 @@ button:focus-visible {
 
 @media (max-width: 900px) {
     .showcase-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .places-grid { column-count: 2; }
 
     .about-layout {
         grid-template-columns: minmax(0, 1fr);
@@ -979,7 +1056,6 @@ button:focus-visible {
     }
 
     .service-card:hover,
-    .place:hover img,
     .preview-video-btn:hover {
         transform: none;
     }
@@ -1002,9 +1078,9 @@ button:focus-visible {
 
                 <div>
                     <div class="showcase-text">
-                        <h1>Раскрой свою внутреннюю силу</h1>
+                        <h1>Трансформационные ретриты в Местах Силы</h1>
                         <p class="showcase-lead">
-                            Помогу восстановить состояние и сбалансировать сферы жизни.
+                            Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.
                             <strong>Готов(а) шагнуть в трансформацию со мной?</strong>
                         </p>
                         <div class="showcase-buttons">
@@ -1025,13 +1101,20 @@ button:focus-visible {
             </div>
         </header>
 
-        <!-- Места силы: плитки создаёт скрипт из того же списка PHOTOS; пока фото не загрузились, блок скрыт -->
-        <section class="places" id="places" hidden>
+        <!-- Места силы: карусель. Слайды создаёт скрипт из списка PHOTOS; пока фото не проверены, блок скрыт -->
+        <section class="places" id="places" hidden aria-label="Места силы">
             <div class="container">
                 <h2 class="section-title">Места силы</h2>
                 <p class="section-lead">Ретриты проходят у подножия Иремеля и Зигальги</p>
-                <div class="places-grid" id="placesGrid"></div>
             </div>
+
+            <div class="carousel">
+                <button type="button" class="carousel-arrow carousel-prev" id="placesPrev" aria-label="Предыдущее фото">&#8249;</button>
+                <div class="carousel-track" id="placesTrack" tabindex="0" role="region" aria-label="Фото мест силы. Листайте вбок"></div>
+                <button type="button" class="carousel-arrow carousel-next" id="placesNext" aria-label="Следующее фото">&#8250;</button>
+            </div>
+
+            <div class="carousel-dots" id="placesDots" role="group" aria-label="Выбор фото"></div>
         </section>
 
         <!-- Знакомство с мастером -->
@@ -1040,15 +1123,13 @@ button:focus-visible {
                 <div class="about-layout">
                     <figure class="about-photo">
                         <!-- width и height — реальные размеры файла (сейчас 960 × 1280); при замене фото обновите числа -->
-                        <img src="media/masters/ilvera.jpg" alt="Ильвера Ситдикова" width="960" height="1280" loading="lazy" decoding="async"
+                        <img src="media/masters/ilvera.jpeg" alt="Ильвера Ситдикова" width="960" height="1280" loading="lazy" decoding="async"
                              onerror="var f=this.closest('.about-photo');f.hidden=true;f.parentNode.classList.add('no-photo')">
                     </figure>
 
                     <div class="about-content">
                         <p class="about-kicker">Ильвера Ситдикова</p>
                         <p class="about-role">Духовный наставник и целитель</p>
-                        <p class="about-bio">Основатель авторских ретритов, объединяет мастеров и телесных практиков для глубинных трансформаций во взаимодействии с человеком.</p>
-
                     <h2 class="about-title">Давай знакомиться</h2>
                     <ul class="about-list">
                         <li>Мастер глубинной трансформации и дыхательных практик.</li>
@@ -1650,15 +1731,18 @@ button:focus-visible {
             }
         });
 
-        /* ---------- Галерея «Места силы» и просмотр фото ---------- */
+        /* ---------- Карусель «Места силы» и просмотр фото ---------- */
         var section = byId('places');
-        var grid = byId('placesGrid');
+        var track = byId('placesTrack');
+        var dotsHolder = byId('placesDots');
+        var prevArrow = byId('placesPrev');
+        var nextArrow = byId('placesNext');
         var lightbox = byId('lightbox');
         var lightboxImg = byId('lightboxImg');
         var closeButton = byId('lightboxClose');
         var prevButton = byId('lightboxPrev');
         var nextButton = byId('lightboxNext');
-        var tiles = [];          // плитки, которые сейчас есть в галерее
+        var tiles = [];          // слайды, которые сейчас есть в карусели
         var lightboxIndex = 0;
         var lastFocused = null;
 
@@ -1700,6 +1784,99 @@ button:focus-visible {
             updateLightbox();
         }
 
+        /* --- Прокрутка карусели --- */
+        function leftPadding() {
+            return tiles.length ? tiles[0].offsetLeft : 0;
+        }
+
+        function targetLeft(index) {
+            return tiles[index].offsetLeft - leftPadding();
+        }
+
+        // Слайд, который сейчас ближе всего к левому краю
+        function nearestIndex() {
+            var best = 0;
+            var bestDistance = Infinity;
+            tiles.forEach(function (tile, index) {
+                var distance = Math.abs(targetLeft(index) - track.scrollLeft);
+                if (distance < bestDistance) {
+                    best = index;
+                    bestDistance = distance;
+                }
+            });
+            return best;
+        }
+
+        function goTo(index) {
+            if (!tiles.length) {
+                return;
+            }
+            var left = targetLeft(Math.max(0, Math.min(tiles.length - 1, index)));
+            if (typeof track.scrollTo === 'function') {
+                track.scrollTo({ left: left });
+            } else {
+                track.scrollLeft = left;
+            }
+        }
+
+        function updateControls() {
+            if (!tiles.length) {
+                return;
+            }
+            var atStart = track.scrollLeft <= 1;
+            var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+            var index = atEnd ? tiles.length - 1 : nearestIndex();
+            Array.prototype.forEach.call(dotsHolder.children, function (dot, i) {
+                dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+            });
+            prevArrow.disabled = atStart;
+            nextArrow.disabled = atEnd;
+        }
+
+        // Перерисовывает точки и подписи после любого изменения набора слайдов
+        function refresh() {
+            dotsHolder.innerHTML = '';
+            tiles.forEach(function (tile, index) {
+                tile.setAttribute('aria-label', 'Открыть фото ' + (index + 1) + ' из ' + tiles.length);
+                if (tiles.length > 1) {
+                    var dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'carousel-dot';
+                    dot.setAttribute('aria-label', 'Фото ' + (index + 1) + ' из ' + tiles.length);
+                    dot.addEventListener('click', function () { goTo(index); });
+                    dotsHolder.appendChild(dot);
+                }
+            });
+            prevArrow.hidden = nextArrow.hidden = tiles.length < 2;
+            updateControls();
+        }
+
+        var ticking = false;
+        track.addEventListener('scroll', function () {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(function () {
+                    ticking = false;
+                    updateControls();
+                });
+            }
+        }, { passive: true });
+        window.addEventListener('resize', updateControls);
+
+        prevArrow.addEventListener('click', function () { goTo(nearestIndex() - 1); });
+        nextArrow.addEventListener('click', function () { goTo(nearestIndex() + 1); });
+
+        track.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                goTo(nearestIndex() - 1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                goTo(nearestIndex() + 1);
+            }
+        });
+
+        /* --- Слайды --- */
         function removeTile(tile) {
             var position = tiles.indexOf(tile);
             if (position !== -1) {
@@ -1711,6 +1888,8 @@ button:focus-visible {
                 if (lightbox.classList.contains('active')) {
                     closeLightbox();
                 }
+            } else {
+                refresh();
             }
         }
 
@@ -1720,13 +1899,12 @@ button:focus-visible {
             tile.className = 'place';
             tile.dataset.src = photo.src;
             tile.dataset.alt = photo.alt || DEFAULT_ALT;
-            tile.setAttribute('aria-label', 'Открыть фото');
 
             var img = document.createElement('img');
             img.alt = tile.dataset.alt;
             img.loading = 'lazy';
             img.decoding = 'async';
-            // Если файл всё же не открылся, плитка убирается, а при пустой галерее скрывается весь блок
+            // Если файл всё же не открылся, слайд убирается, а при пустой карусели скрывается весь блок
             img.addEventListener('error', function () { removeTile(tile); });
             tile.addEventListener('click', function () {
                 var position = tiles.indexOf(tile);
@@ -1736,7 +1914,7 @@ button:focus-visible {
             });
             img.src = photo.src;
             tile.appendChild(img);
-            grid.appendChild(tile);
+            track.appendChild(tile);
             tiles.push(tile);
         }
 
@@ -1759,6 +1937,7 @@ button:focus-visible {
                 }
             });
             section.hidden = tiles.length === 0;
+            refresh();
         });
 
         closeButton.addEventListener('click', closeLightbox);
