@@ -57,6 +57,26 @@
         .practice p { font-size: 0.98rem; color: var(--text-body); }
         .practice p + p { margin-top: 0.8em; }
 
+        /* Широкая карточка на обе колонки; с фото: фото слева, текст справа */
+        .practice-wide { grid-column: 1 / -1; }
+
+        .practice-with-photo {
+            display: grid;
+            grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+            gap: 28px;
+            align-items: center;
+        }
+
+        .practice-with-photo.no-photo { display: block; }
+        .practice-photo { margin: 0; }
+
+        .practice-photo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
         .guides {
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
@@ -148,6 +168,11 @@
         @media (max-width: 900px) {
             .practices,
             .guides { grid-template-columns: minmax(0, 1fr); }
+
+            .practice-with-photo {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -235,9 +260,16 @@
                         <p>Глубокая работа с фасциями: все спайки и зажимы раскрываются, органы получают свободу, исцеляются и омолаживаются. Тело вспоминает свое природное здоровье — то, которое было с вами от рождения.</p>
                     </article>
 
-                    <article class="practice">
-                        <h3><span class="emoji" aria-hidden="true">🎶</span> Хрустальные поющие чаши — работа через всю чакральную систему</h3>
-                        <p>Вибрации хрусталя проходят сквозь тело, «выключают внутренний шум» и настраивают вас на вашу истинную частоту. Это не просто расслабление — это раскрытие истинной сути и предназначения. Звук ведет вас по чакральной системе, слой за слоем, к центру — к вашему подлинному «я». Многие отмечают состояние после практики, сравнимое с полноценным 8-часовым сном — только просыпаетесь вы не тем же человеком.</p>
+                    <article class="practice practice-wide practice-with-photo">
+                        <figure class="practice-photo">
+                            <!-- Фото лежит в media/retreat-fire/bowls.jpeg (1280 × 960). Если файла нет, карточка показывается без фото. -->
+                            <img src="media/retreat-fire/bowls.jpeg" alt="Хрустальные поющие чаши" width="1280" height="960" loading="lazy" decoding="async"
+                                 onerror="var c=this.closest('.practice');this.closest('.practice-photo').hidden=true;c.classList.add('no-photo')">
+                        </figure>
+                        <div class="practice-body">
+                            <h3><span class="emoji" aria-hidden="true">🎶</span> Хрустальные поющие чаши — работа через всю чакральную систему</h3>
+                            <p>Вибрации хрусталя проходят сквозь тело, «выключают внутренний шум» и настраивают вас на вашу истинную частоту. Это не просто расслабление — это раскрытие истинной сути и предназначения. Звук ведет вас по чакральной системе, слой за слоем, к центру — к вашему подлинному «я». Многие отмечают состояние после практики, сравнимое с полноценным 8-часовым сном — только просыпаетесь вы не тем же человеком.</p>
+                        </div>
                     </article>
 
                     <article class="practice">
@@ -250,7 +282,7 @@
                         <p>Горные реки, чистейший воздух, энергия древних вершин. Земля здесь сама помогает — вам остается только открыться.</p>
                     </article>
 
-                    <article class="practice">
+                    <article class="practice practice-wide">
                         <h3><span class="emoji" aria-hidden="true">🧖‍♀️</span> Баня</h3>
                         <p>Жар, пар, вода, тишина. Древний способ очищения, который завершает и закрепляет каждый день ретрита.</p>
                     </article>
