@@ -21,536 +21,127 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="site.css">
     <style>
-/* ==========================================================================
-   Страница ретрита «Огненное сердце Урала». Стили и переменные — как на главной.
-   ========================================================================== */
-:root {
-    --primary-color: #4A3B5E;
-    --primary-dark: #2F2440;
-    --accent-color: #C5A880;
-    --bronze: #8B6B3D;
-    --forest: #29351D;
-    --bg-light: #F9F7F5;
-    --text-dark: #2D2D2D;
-    --text-body: #444444;
-    --text-muted: #5A5A5A;
-    --text-light: #FFFFFF;
-    --footer-bg: #333333;
-    --footer-text: #B8B8B8;
+        /* Только для страницы огненного ретрита: программа и проводники */
+        .subsection + .subsection { margin-top: 56px; }
+        .subsection > .section-title { margin-bottom: 24px; }
 
-    --font-body: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-}
+        .practices {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 30px;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-[hidden] { display: none !important; }
+        .practice {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 3px solid var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
 
-body {
-    font-family: var(--font-body);
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--bg-light);
-}
+        .practice h3 {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            color: var(--primary-color);
+        }
 
-img, svg { max-width: 100%; }
+        .practice .emoji { font-size: 1.5rem; line-height: 1.1; }
+        .practice p { font-size: 0.98rem; color: var(--text-body); }
+        .practice p + p { margin-top: 0.8em; }
 
-h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-}
+        .guides {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+            gap: 30px;
+            align-items: start;
+            margin-top: 48px;
+        }
 
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 3px;
-}
+        .guide {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 3px solid var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        .guide-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
 
-.icon {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-    vertical-align: -0.125em;
-    flex-shrink: 0;
-}
+        .guide-photo {
+            width: 84px;
+            height: 84px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            object-fit: cover;
+            object-position: top;
+        }
 
-.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+        .guide h3 { font-size: 1.8rem; line-height: 1.1; color: var(--primary-color); }
+        .guide-role { margin-top: 4px; font-size: 0.9rem; line-height: 1.4; color: var(--text-muted); }
+        .guide p { font-size: 0.98rem; color: var(--text-body); }
+        .guide p + p { margin-top: 0.8em; }
+        .guide h4 { margin: 24px 0 10px; font-size: 1.3rem; color: var(--primary-color); }
 
-.skip-link {
-    position: absolute;
-    left: 16px;
-    top: -80px;
-    z-index: 3000;
-    padding: 10px 16px;
-    border-radius: 8px;
-    background: var(--primary-color);
-    color: var(--text-light);
-    text-decoration: none;
-}
-.skip-link:focus { top: 16px; }
+        .guide ul { list-style: none; }
+        .guide li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-body);
+        }
+        .guide li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
 
-/* --- Кнопки --- */
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 1px solid var(--primary-color);
-}
-.btn:hover { background-color: transparent; color: var(--primary-color); }
+        .guide-essence {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
 
-.btn-outline {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--forest);
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 2px solid var(--forest);
-}
-.btn-outline:hover { background-color: var(--forest); color: var(--text-light); }
+        .guide-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-underline-offset: 3px;
+        }
 
-.btn-light {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    color: var(--primary-dark);
-}
-.btn-light:hover { background-color: var(--text-light); color: var(--primary-color); }
+        @media (max-width: 900px) {
+            .practices,
+            .guides { grid-template-columns: minmax(0, 1fr); }
+        }
 
-/* --- Первый экран --- */
-.hero-section {
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    padding: 28px 0 72px;
-}
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 32px;
-    color: var(--primary-color);
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-underline-offset: 3px;
-}
-
-.hero-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 64px;
-    align-items: center;
-}
-
-.hero-wrapper.no-photo {
-    grid-template-columns: minmax(0, 760px);
-    justify-content: center;
-}
-
-.hero-text h1 {
-    font-size: clamp(2.3rem, 5vw, 3.4rem);
-    line-height: 1.08;
-    color: var(--primary-color);
-    margin-bottom: 14px;
-}
-
-.hero-place {
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--bronze);
-    margin-bottom: 24px;
-}
-
-.hero-description {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: var(--text-body);
-    margin-bottom: 32px;
-    border-left: 4px solid var(--accent-color);
-    padding-left: 20px;
-}
-
-.hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
-
-/* Ближайшие даты (данные — из retreat-dates.js, как на странице семейного ретрита) */
-.dates-panel {
-    margin-bottom: 32px;
-    padding: 20px 24px;
-    background: #fff;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.dates-panel h2 {
-    font-size: 1.7rem;
-    line-height: 1.15;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.dates-panel p { margin-bottom: 6px; }
-
-.dates-panel .dates-contact {
-    margin: 12px 0 0;
-    font-size: 0.92rem;
-    color: var(--text-muted);
-}
-
-.dates-panel a {
-    color: var(--primary-color);
-    font-weight: 600;
-    text-underline-offset: 3px;
-}
-
-.hero-image-block {
-    width: 100%;
-    max-width: 380px;      /* фото вертикальное 9:16: при 380px по ширине высота ≈ 675px */
-    justify-self: center;
-}
-
-.hero-image-block img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 25px 25px 0 rgba(197, 168, 128, 0.25);
-    object-fit: cover;
-}
-
-/* --- Секции --- */
-.section { padding: 72px 0; }
-.section-light { background: var(--bg-light); }
-.section-white { background: #fff; }
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    line-height: 1.15;
-    margin-bottom: 40px;
-    color: var(--primary-color);
-}
-
-.prose {
-    max-width: 760px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-body);
-}
-.prose p + p { margin-top: 1.1em; }
-
-.prose-accent {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 1.2;
-    text-align: center;
-    color: var(--primary-color);
-    margin-top: 1.2em;
-}
-
-/* Программа */
-.practices {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px;
-}
-
-.practice {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.practice h3 {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin-bottom: 14px;
-    color: var(--primary-color);
-}
-
-.practice .emoji { font-size: 1.5rem; line-height: 1.1; }
-.practice p { font-size: 0.98rem; color: var(--text-body); }
-.practice p + p { margin-top: 0.8em; }
-
-/* Списки с ✦ */
-.star-list { list-style: none; }
-.star-list li {
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: var(--text-body);
-}
-.star-list li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    font-size: 1.2rem;
-    color: var(--accent-color);
-}
-
-.subsection + .subsection { margin-top: 56px; }
-.subsection > .section-title { margin-bottom: 24px; }
-
-/* Проводники */
-.guides {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
-    gap: 30px;
-    align-items: start;
-    margin-top: 48px;
-}
-
-.guide {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    border-top: 3px solid var(--accent-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.guide-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 18px;
-}
-
-.guide-photo {
-    width: 84px;
-    height: 84px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    object-fit: cover;
-    object-position: top;
-}
-
-.guide h3 {
-    font-size: 1.8rem;
-    line-height: 1.1;
-    color: var(--primary-color);
-}
-
-.guide-role {
-    margin-top: 4px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: var(--text-muted);
-}
-
-.guide p { font-size: 0.98rem; color: var(--text-body); }
-.guide p + p { margin-top: 0.8em; }
-
-.guide h4 {
-    margin: 24px 0 10px;
-    font-size: 1.3rem;
-    color: var(--primary-color);
-}
-
-.guide ul { list-style: none; }
-.guide li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    color: var(--text-body);
-}
-.guide li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    font-size: 0.9rem;
-    color: var(--accent-color);
-}
-
-.guide-essence {
-    margin-top: 24px;
-    padding-top: 18px;
-    border-top: 1px solid #eee;
-}
-
-.guide-link {
-    display: inline-block;
-    margin-top: 16px;
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-underline-offset: 3px;
-}
-
-/* Призыв и контакты */
-.cta {
-    padding: 80px 0;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    text-align: center;
-}
-
-.cta h2 {
-    font-size: 2.5rem;
-    line-height: 1.15;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-}
-
-.cta p {
-    max-width: 700px;
-    margin: 0 auto 36px;
-    font-size: 1.1rem;
-}
-
-.cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 28px;
-}
-
-.cta-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: 50px;
-    color: var(--text-light);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.cta-btn:hover { filter: brightness(1.15); }
-
-/* Цвета кнопок контактов — как на страницах «Сила рода» и «Познай свою силу».
-   Светлая рамка нужна, чтобы тёмные кнопки не сливались с фиолетовым фоном. */
-.cta-btn.phone { background: #6B4E3D; }
-.cta-btn.tg { background: #229ED9; }
-.cta-btn.wa { background: #0E7C66; }
-.cta-btn.max { background: #2f3440; }
-.cta-btn.vk { background: #0077FF; }
-
-/* --- Футер --- */
-footer {
-    padding: 40px 0;
-    text-align: center;
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    font-size: 0.9rem;
-}
-
-.social-icons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.social-link {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #444;
-    color: #fff;
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.social-link:hover { transform: translateY(-5px); }
-.social-link.tg:hover { background: #229ED9; }
-.social-link.wa:hover { background: #25D366; }
-.social-link.inst:hover { background: #C13584; }
-.social-link.vk:hover { background: #0077FF; }
-.social-link.yt:hover { background: #FF0000; }
-.social-link.mail:hover { background: #EA4335; }
-.social-link.channel { background: #fff; color: #1B7DAE; border: 2px solid #229ED9; }
-.social-link.channel:hover { background: #229ED9; color: #fff; }
-.social-link.max { background: #20232a; border: 1px solid #3a3f4b; }
-.social-link.max:hover { background: #2f3440; }
-.max-icon {
-    font-family: "Arial Black", Arial, sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1;
-}
-
-/* --- Адаптив --- */
-@media (max-width: 900px) {
-    .hero-section { padding: 24px 0 56px; }
-    .hero-wrapper { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .hero-image-block { max-width: 320px; }
-    .hero-image-block img { box-shadow: 14px 14px 0 rgba(197, 168, 128, 0.25); }
-    .practices,
-    .guides { grid-template-columns: minmax(0, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .section { padding: 56px 0; }
-    .section-title,
-    .cta h2 { font-size: 2.1rem; }
-    .prose-accent { font-size: 1.7rem; }
-    .practice,
-    .guide { padding: 24px; }
-}
-
-@media (max-width: 400px) {
-    .btn, .btn-outline { padding: 14px 26px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    .social-link:hover { transform: none; }
-}
+        @media (max-width: 768px) {
+            .practice,
+            .guide { padding: 24px; }
+        }
     </style>
 </head>
 
 <body>
     <a class="skip-link" href="#main">Перейти к содержимому</a>
 
-    <!-- Иконки: Font Awesome Free 6 (fontawesome.com), лицензия CC BY 4.0 — https://fontawesome.com/license/free -->
-    <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="i-telegram" viewBox="0 0 496 512"><path d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"/></symbol>
-        <symbol id="i-whatsapp" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
-        <symbol id="i-instagram" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol>
-        <symbol id="i-vk" viewBox="0 0 448 512"><path d="M31.4907 63.4907C0 94.9813 0 145.671 0 247.04V264.96C0 366.329 0 417.019 31.4907 448.509C62.9813 480 113.671 480 215.04 480H232.96C334.329 480 385.019 480 416.509 448.509C448 417.019 448 366.329 448 264.96V247.04C448 145.671 448 94.9813 416.509 63.4907C385.019 32 334.329 32 232.96 32H215.04C113.671 32 62.9813 32 31.4907 63.4907ZM75.6 168.267H126.747C128.427 253.76 166.133 289.973 196 297.44V168.267H244.16V242C273.653 238.827 304.64 205.227 315.093 168.267H363.253C359.313 187.435 351.46 205.583 340.186 221.579C328.913 237.574 314.461 251.071 297.733 261.227C316.41 270.499 332.907 283.63 346.132 299.751C359.357 315.873 369.01 334.618 374.453 354.747H321.44C316.555 337.262 306.614 321.61 292.865 309.754C279.117 297.899 262.173 290.368 244.16 288.107V354.747H238.373C136.267 354.747 78.0267 284.747 75.6 168.267Z"/></symbol>
-        <symbol id="i-youtube" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></symbol>
-        <symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol>
-        <symbol id="i-bullhorn" viewBox="0 0 512 512"><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"/></symbol>
-    </svg>
 
     <main id="main">
 
@@ -684,7 +275,7 @@ footer {
                     <!-- Ильвера -->
                     <article class="guide">
                         <div class="guide-head">
-                            <img class="guide-photo" src="media/reviews/photo.jpg" alt="Ильвера Ситдикова" width="84" height="84" loading="lazy" decoding="async"
+                            <img class="guide-photo" src="media/masters/ilvera.jpg" alt="Ильвера Ситдикова" width="84" height="84" loading="lazy" decoding="async"
                                  onerror="this.hidden=true">
                             <div>
                                 <h3>Ильвера Ситдикова</h3>
@@ -699,8 +290,8 @@ footer {
                     <!-- Рушана -->
                     <article class="guide">
                         <div class="guide-head">
-                            <!-- TODO: положите фото в media/retreat-fire/rushana.jpeg. Пока файла нет, фото скрыто. -->
-                            <img class="guide-photo" src="media/retreat-fire/rushana.jpeg" alt="Рушана Раевская" width="84" height="84" loading="lazy" decoding="async"
+                            <!-- TODO: положите фото в media/masters/rushana.jpg. Пока файла нет, фото скрыто. -->
+                            <img class="guide-photo" src="media/masters/rushana.jpg" alt="Рушана Раевская" width="84" height="84" loading="lazy" decoding="async"
                                  onerror="this.hidden=true">
                             <div>
                                 <h3>Рушана Раевская</h3>
@@ -736,62 +327,23 @@ footer {
             </div>
         </section>
 
-        <!-- Призыв и контакты Ильверы -->
+        <!-- Приглашение к контакту -->
         <section class="cta">
             <div class="container">
                 <h2>Три дня. Одно место. Ваша новая жизнь.</h2>
                 <p>Количество мест ограничено. Это камерный ретрит — глубокая работа требует тишины и пространства.</p>
-                <a href="https://t.me/ILVERA69" class="btn btn-light">Забронировать место и узнать детали</a>
-
+                <p>Забронировать место и узнать детали:</p>
                 <div class="cta-actions">
-                    <a class="cta-btn phone" href="tel:+79173482348">Позвонить: +79173482348</a>
-                    <a class="cta-btn tg" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Telegram</a>
-                    <a class="cta-btn wa" href="https://wa.me/qr/M2SDO3W56BNOA1" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                    <a class="cta-btn max" href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" target="_blank" rel="noopener noreferrer">MAX</a>
-                    <a class="cta-btn vk" href="https://vk.ru/id177739125" target="_blank" rel="noopener noreferrer">VK</a>
+                    <a class="btn btn-light" href="tel:+79173482348">Позвонить: +79173482348</a>
+                    <a class="btn btn-outline-light" href="https://t.me/ILVERA69" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="social-icons">
-                <a href="https://t.me/ILVERA69" class="social-link tg" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram" title="Написать в Telegram">
-                    <svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>
-                </a>
-                <a href="https://t.me/+0lgaxWEGh8gwZTg6" class="social-link channel" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал" title="Telegram-канал">
-                    <svg class="icon" aria-hidden="true"><use href="#i-bullhorn"/></svg>
-                </a>
-                <a href="https://wa.me/qr/M2SDO3W56BNOA1" class="social-link wa" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" title="WhatsApp">
-                    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                </a>
-                <a href="https://instagram.com/sitdikova_ilvera" class="social-link inst" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-                    <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
-                </a>
-                <a href="mailto:ilvera69@mail.ru" class="social-link mail" aria-label="Написать на e-mail" title="E-mail">
-                    <svg class="icon" aria-hidden="true"><use href="#i-envelope"/></svg>
-                </a>
-                <a href="https://max.ru/u/f9LHodD0cOJS7diLaHgIue6mxa4Qjx1kaxz4WjEKQkUqwhomlWcYtCnDxpA" class="social-link max" target="_blank" rel="noopener noreferrer" aria-label="Написать в MAX" title="MAX">
-                    <span class="max-icon" aria-hidden="true">MAX</span>
-                </a>
-                <a href="https://vk.ru/id177739125" class="social-link vk" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте" title="ВКонтакте">
-                    <svg class="icon" aria-hidden="true"><use href="#i-vk"/></svg>
-                </a>
-                <a href="https://youtube.com/@mommy_dragon?si=_bSPuVhnY9Qzcek5" class="social-link yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
-                    <svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>
-                </a>
-            </div>
-
-            <p id="copyrightText"></p>
-        </div>
-    </footer>
 
     <script src="./retreat-dates.js"></script>
-    <script>
-        document.getElementById('copyrightText').textContent =
-            '© ' + new Date().getFullYear() + ' Ильвера Ситдикова. Духовный наставник.';
-    </script>
+    <script src="site-footer.js"></script>
 </body>
 </html>
