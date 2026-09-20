@@ -1633,28 +1633,55 @@ button:focus-visible {
     </script>
     <script>
     /*
-     * Виды на главной: слайдшоу на первом экране и галерея «Места силы».
-     * Оба берут фото из ОДНОГО списка PHOTOS: правьте только его.
-     *   src      — путь к фото
-     *   hero     — true: фото показывается и в слайдшоу на первом экране
-     *   position — какая часть фото остаётся в кадре при обрезке на первом экране (по умолчанию "center 40%")
+     * Фото на главной: подложка первого экрана (слайдшоу) и карусель «Места силы».
+     * Оба места берут фото из ОДНОГО списка PHOTOS ниже: правьте только его.
+     *
+     * Одна строка списка = одно фото:
+     *   src      — путь к фото (можно брать из любой папки media)
+     *   hero     — true: фото идёт в подложку первого экрана
+     *   carousel — false: НЕ показывать фото в карусели (без этой строки фото в карусели есть)
+     *   position — какая часть фото остаётся в кадре при обрезке на первом экране
+     *              (по умолчанию "center 40%"; первое слово — по горизонтали, второе — по вертикали)
      *   alt      — подпись для скринридеров (необязательно)
+     *
+     * Примеры строк:
+     *   только в карусель:            { src: 'media/iremel/photo_5.jpeg' },
+     *   и в подложку, и в карусель:   { src: 'media/iremel/photo_2.jpeg', hero: true },
+     *   только в подложку:            { src: 'media/iremel/photo_3.jpeg', hero: true, carousel: false },
+     *
+     * Порядок строк = порядок показа (и в подложке, и в карусели).
+     * Подложка всегда начинается с первой строки, где есть hero: true (слайдшоу ждёт её загрузки).
+     * Если этого фото на сервере нет, начнёт следующее по списку.
+     * Строки между запятыми можно менять местами, удалять и добавлять; после каждой строки, кроме последней, нужна запятая.
      * Фото, которых нет на сервере, пропускаются сами.
      */
     (function () {
         'use strict';
 
         var PHOTOS = [
-            { src: 'media/iremel/photo_2.jpeg', hero: true, position: 'center 45%' },
-            { src: 'media/iremel/photo_3.jpeg', hero: true },
             { src: 'media/iremel/photo_4.jpeg', hero: true },
-            { src: 'media/iremel/photo_5.jpeg' },
+            { src: 'media/iremel/photo_1.jpeg', hero: true },
+            { src: 'media/iremel/photo_3.jpeg', hero: true,  position: 'center 20%'   },
+            // { src: 'media/iremel/photo_2.jpeg', hero: true, carousel: false, position: 'center 45%' },
+            { src: 'media/iremel/photo_8.jpeg' },
+            { src: 'media/iremel/photo_9.jpeg' },
+            { src: 'media/iremel/photo_10.jpeg', hero: true,  position: 'center 50%'  },
+            { src: 'media/iremel/photo_11.jpeg', hero: true,   position: 'center 10%'  },
+            { src: 'media/iremel/photo_12.jpeg' },
+            { src: 'media/iremel/photo_13.jpeg', hero: true, position: 'center 45%'  },
+            { src: 'media/iremel/photo_14.jpeg' },
             { src: 'media/iremel/photo_6.jpeg' },
+            { src: 'media/iremel/photo_15.jpeg' },
+            { src: 'media/iremel/photo_16.jpeg' },
+            { src: 'media/iremel/photo_17.jpeg' },
+            { src: 'media/iremel/photo_18.jpeg' },
+            { src: 'media/iremel/photo_19.jpeg' },
+            { src: 'media/iremel/photo_20.jpeg' },
             { src: 'media/iremel/photo_7.jpeg', hero: true },
-            { src: 'media/iremel/photo_8.jpeg' }
         ];
         var DEFAULT_ALT = 'Места силы: Иремель';
         var SLIDE_INTERVAL_MS = 7000;
+        var FIRST_SLIDE_WAIT_MS = 10000;   // сколько ждём первое фото подложки, прежде чем показать любое другое
 
         var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var byId = function (id) { return document.getElementById(id); };
@@ -1662,14 +1689,16 @@ button:focus-visible {
         /* ---------- Слайдшоу на первом экране ---------- */
         var slidesBox = byId('showcaseSlides');
         var dotsBox = byId('showcaseDots');
-        var slides = [];
-        var current = -1;
+        var heroPhotos = PHOTOS.filter(function (p) { return p.hero; });
+        var slides = [];           // загруженные слайды в порядке списка
+        var failed = {};           // номера фото подложки, которые не открылись
+        var current = -1;          // -1: слайдшоу ещё не началось
         var timer = null;
         var stoppedByUser = false;
 
         function renderDots() {
             dotsBox.innerHTML = '';
-            if (slides.length < 2) {
+            if (slides.length < 2 || current === -1) {
                 return;
             }
             slides.forEach(function (slide, index) {
@@ -1708,15 +1737,43 @@ button:focus-visible {
         }
 
         function startTimer() {
-            if (reducedMotion || stoppedByUser || slides.length < 2 || timer) {
+            if (reducedMotion || stoppedByUser || slides.length < 2 || current === -1 || timer) {
                 return;
             }
             timer = window.setInterval(function () { show(current + 1); }, SLIDE_INTERVAL_MS);
         }
 
-        function addSlide(photo) {
+        // Первое по списку фото подложки, которое не сломано: именно с него всегда начинается слайдшоу
+        function firstWantedOrder() {
+            for (var i = 0; i < heroPhotos.length; i++) {
+                if (!failed[i]) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Начинаем показ, только когда загрузилось именно первое фото (другие пока ждут).
+        // Если первое фото не открылось, начинаем со следующего по списку.
+        function tryStart() {
+            if (current !== -1) {
+                return;
+            }
+            var wanted = firstWantedOrder();
+            for (var i = 0; i < slides.length; i++) {
+                if (slides[i].order === wanted) {
+                    show(i);
+                    return;
+                }
+            }
+        }
+
+        // order — номер фото среди подложки в списке PHOTOS: по нему слайды выстраиваются в порядке списка,
+        // даже если картинки загрузились в другом порядке
+        function addSlide(photo, order) {
             var slide = document.createElement('div');
             slide.className = 'showcase-slide';
+            slide.order = order;
             slide.style.setProperty('--pos', photo.position || 'center 40%');
 
             var img = document.createElement('img');
@@ -1724,32 +1781,57 @@ button:focus-visible {
             img.decoding = 'async';
             img.addEventListener('load', function () {
                 if (slides.indexOf(slide) === -1) {
-                    slides.push(slide);
-                    renderDots();
-                    if (current === -1) {
-                        show(0);
+                    var insertAt = slides.length;
+                    for (var i = 0; i < slides.length; i++) {
+                        if (slides[i].order > order) {
+                            insertAt = i;
+                            break;
+                        }
                     }
+                    slides.splice(insertAt, 0, slide);
+                    // показанный сейчас слайд остаётся тем же, даже если новый встал перед ним
+                    if (current !== -1 && insertAt <= current) {
+                        current += 1;
+                    }
+                    tryStart();
+                    renderDots();
                     startTimer();
                 }
             });
             img.addEventListener('error', function () {
+                failed[order] = true;
                 var position = slides.indexOf(slide);
                 if (position !== -1) {
                     slides.splice(position, 1);
-                    if (current >= slides.length) {
-                        current = 0;
+                    if (!slides.length) {
+                        current = -1;
+                    } else if (current !== -1) {
+                        if (position < current) {
+                            current -= 1;
+                        }
+                        show(Math.min(current, slides.length - 1));
                     }
-                    renderDots();
-                    show(current);
                 }
                 slide.remove();
+                tryStart();
+                renderDots();
+                startTimer();
             });
             img.src = photo.src;
             slide.appendChild(img);
             slidesBox.appendChild(slide);
         }
 
-        PHOTOS.filter(function (p) { return p.hero; }).forEach(addSlide);
+        heroPhotos.forEach(addSlide);
+
+        // Страховка: если первое фото так и не загрузилось (очень медленная сеть), показываем любое загруженное
+        window.setTimeout(function () {
+            if (current === -1 && slides.length) {
+                show(0);
+                renderDots();
+                startTimer();
+            }
+        }, FIRST_SLIDE_WAIT_MS);
 
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) {
@@ -1958,8 +2040,10 @@ button:focus-visible {
             );
         }
 
-        Promise.all(PHOTOS.map(photoExists)).then(function (exists) {
-            PHOTOS.forEach(function (photo, index) {
+        var CAROUSEL_PHOTOS = PHOTOS.filter(function (photo) { return photo.carousel !== false; });
+
+        Promise.all(CAROUSEL_PHOTOS.map(photoExists)).then(function (exists) {
+            CAROUSEL_PHOTOS.forEach(function (photo, index) {
                 if (exists[index]) {
                     addTile(photo);
                 }
