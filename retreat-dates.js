@@ -18,7 +18,7 @@
  */
 
 /* ===================== ДАННЫЕ ===================== */
-var RETREAT_DATES_SOURCE = {
+const RETREAT_DATES_SOURCE = {
     family: {
         heading: "Ретрит «Сила рода»",
         dates: [
@@ -51,8 +51,8 @@ var RETREAT_DATES_SOURCE = {
 
 /* Ниже ничего менять не нужно: скрытие прошедших дат и вывод блока на страницу. */
 (function () {
-    var DEFAULT_CONTACT_TEXT = "Следующие даты проведения ретритов можно согласовать по телефону: +79173482348";
-    var ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+    const DEFAULT_CONTACT_TEXT = "Следующие даты проведения ретритов можно согласовать по телефону: +79173482348";
+    const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
     function pad(number) {
         return number < 10 ? "0" + number : String(number);
@@ -60,14 +60,14 @@ var RETREAT_DATES_SOURCE = {
 
     // Сегодняшняя дата посетителя в формате ГГГГ-ММ-ДД (строки такого вида корректно сравниваются)
     function todayIso() {
-        var now = new Date();
+        const now = new Date();
         return now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
     }
 
     // Оставляет только актуальные даты и превращает их в обычные строки
     function upcomingDates(list, today) {
-        var result = [];
-        (Array.isArray(list) ? list : []).forEach(function (item) {
+        const result = [];
+        (Array.isArray(list) ? list : []).forEach((item) => {
             if (typeof item === "string") {
                 result.push(item);
                 return;
@@ -89,11 +89,11 @@ var RETREAT_DATES_SOURCE = {
         return result;
     }
 
-    var today = todayIso();
-    var prepared = {};
+    const today = todayIso();
+    const prepared = {};
 
-    Object.keys(RETREAT_DATES_SOURCE).forEach(function (key) {
-        var source = RETREAT_DATES_SOURCE[key] || {};
+    Object.keys(RETREAT_DATES_SOURCE).forEach((key) => {
+        const source = RETREAT_DATES_SOURCE[key] || {};
         prepared[key] = {
             heading: source.heading || "",
             dates: upcomingDates(source.dates, today),
@@ -106,14 +106,14 @@ var RETREAT_DATES_SOURCE = {
     window.RETREAT_DATES = prepared;
 
     function render() {
-        var panel = document.getElementById("datesPanel");
+        const panel = document.getElementById("datesPanel");
         if (!panel) {
             return;
         }
 
-        var config = prepared[panel.getAttribute("data-retreat-key")] || {};
-        var contactText = config.contactText || DEFAULT_CONTACT_TEXT;
-        var html;
+        const config = prepared[panel.getAttribute("data-retreat-key")] || {};
+        const contactText = config.contactText || DEFAULT_CONTACT_TEXT;
+        let html;
 
         if (!config.dates || !config.dates.length) {
             // Актуальных дат нет: только фраза про телефон
@@ -123,7 +123,7 @@ var RETREAT_DATES_SOURCE = {
             if (config.heading) {
                 html += "<p><strong>" + config.heading + "</strong></p>";
             }
-            config.dates.forEach(function (dateText) {
+            config.dates.forEach((dateText) => {
                 html += "<p>" + dateText + "</p>";
             });
             if (config.additionalInfo) {
