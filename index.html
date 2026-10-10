@@ -1246,7 +1246,7 @@ button:focus-visible {
         <section class="reviews" id="reviews">
             <div class="container">
                 <h2 class="section-title">Стена доверия</h2>
-                <p class="reviews-hint">Нажми на фото в галерее, чтобы открыть скан отзыва</p>
+                <p class="reviews-hint">Нажми на фото в галерее, чтобы посмотреть отзыв</p>
 
                 <div class="reviews-wrapper">
                     <!-- Сетка миниатюр -->
@@ -1480,7 +1480,12 @@ button:focus-visible {
             previewActions.hidden = true;
         }
 
-        showScan([data.scan, data.photo], data.title);
+        if (data.video) {
+            previewScan.hidden = true;
+            previewScan.onerror = null;
+        } else {
+            showScan([data.scan, data.photo], data.title);
+        }
 
         previewPanel.classList.add('active');
 
