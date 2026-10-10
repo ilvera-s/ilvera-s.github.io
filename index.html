@@ -1406,22 +1406,70 @@ button:focus-visible {
         lastFocusedElement = null;
     };
 
+    // const openVideoModal = function (video) {
+    //     if (!videoModal || !videoModalPlayer || !video || !video.src) {
+    //         return;
+    //     }
+    //     lastFocusedElement = document.activeElement;
+    //     videoModalTitle.textContent = video.title ? 'Видеоотзыв: ' + video.title : 'Видеоотзыв клиента';
+    //     videoModalPlayer.src = video.src;
+    //     if (video.poster) {
+    //         videoModalPlayer.poster = video.poster;
+    //     } else {
+    //         videoModalPlayer.removeAttribute('poster');
+    //     }
+    //     videoModal.classList.add('active');
+    //     videoModal.setAttribute('aria-hidden', 'false');
+    //     document.body.style.overflow = 'hidden';
+    //     videoModalPlayer.load();
+    //     videoModalClose.focus();
+    // };
+
+
     const openVideoModal = function (video) {
         if (!videoModal || !videoModalPlayer || !video || !video.src) {
             return;
         }
+
         lastFocusedElement = document.activeElement;
-        videoModalTitle.textContent = video.title ? 'Видеоотзыв: ' + video.title : 'Видеоотзыв клиента';
+
+        videoModalTitle.textContent = video.title
+            ? 'Видеоотзыв: ' + video.title
+            : 'Видеоотзыв клиента';
+
+        // Останавливаем предыдущее видео, если оно было открыто
+        videoModalPlayer.pause();
+        videoModalPlayer.removeAttribute('src');
+        videoModalPlayer.removeAttribute('poster');
+
+        // Настраиваем новое видео
         videoModalPlayer.src = video.src;
+
         if (video.poster) {
             videoModalPlayer.poster = video.poster;
-        } else {
-            videoModalPlayer.removeAttribute('poster');
         }
+
         videoModal.classList.add('active');
         videoModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        // Начинаем загрузку и запрашиваем автоматическое воспроизведение
         videoModalPlayer.load();
+
+        const playPromise = videoModalPlayer.play();
+
+        // Если браузер заблокировал автозапуск, сохраняем обычное управление
+        if (playPromise !== undefined) {
+            playPromise.catch((error) => {
+                if (error.name !== 'AbortError') {
+                    console.warn(
+                        'Автозапуск видео не удался. Нажмите Play в плеере.',
+                        error
+                    );
+                }
+            });
+        }
+
         videoModalClose.focus();
     };
 
