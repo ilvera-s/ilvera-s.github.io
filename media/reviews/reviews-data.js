@@ -185,8 +185,29 @@
       city: "г. Санкт-Петербург",
       regalia: "29 лет, профессиональный гипнотерапевт и целитель.",
       photo: "media/reviews/29.jpeg",
-      scan: "media/reviews/r29.jpeg",
       video: "media/reviews/v29.mp4"
+    },
+    "30": {
+      name: "Алёна",
+      city: "г. Уфа",
+      regalia: "45 лет, гипнотерапевт.",
+      photo: "media/reviews/30.jpeg",
+      video: "media/reviews/v30.mp4"
+    },
+    "31": {
+      name: "Файруза Каримова",
+
+      city: "г. Уфа",
+      regalia: "Психолог, паропсихолог, целитель, номеролог, мастер дыхательных практик.",
+      photo: "media/reviews/31.jpeg",
+      video: "media/reviews/v31.mp4"
+    },
+    "32": {
+      name: "Елена",
+      city: "г. Санкт-Петербург",
+      regalia: "45 лет, Отзыв с Огненного ретрита",
+      photo: "media/reviews/32.jpeg",
+      video: "media/reviews/v32.mp4"
     }
   };
 
